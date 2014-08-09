@@ -18,10 +18,10 @@ public abstract class DaoMemo<T> implements DaoIF<T>{
 	public T get(Long id) {
 		return this.getDB().get(id);
 	}
-	
+		
 	@Override
-	public void update(Long id, T modifiedObj) {
-		this.getDB().put(id, modifiedObj);
+	public void update(Long id, HashMap<String, Object> modifiedObj) {
+		setCampos(modifiedObj, this.getDB().get(id));
 	}
 	
 	@Override

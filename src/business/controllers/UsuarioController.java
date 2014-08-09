@@ -40,8 +40,7 @@ public class UsuarioController implements UsuarioControllerIF{
 
 	@Override
 	public void update(Long id, HashMap<String, Object> objeto) {
-		// TODO Auto-generated method stub
-		
+		DaoAbstractFactory.getInstance(UsuarioAB.class).update(id, objeto);
 	}
 
 	@Override

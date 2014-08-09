@@ -20,7 +20,7 @@ public interface DaoIF<T> {
     
     public abstract void delete(Long id);
     
-    public abstract void update(Long id, T modifiedObj);
+    public abstract void update(Long id, HashMap<String, Object> modifiedObj);
     
     public abstract T get(Long id);
 
