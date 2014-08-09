@@ -23,7 +23,6 @@ public class DaoEvento extends DaoMemo<EventoAB>{
 	
 	@Override
 	public EventoAB create(HashMap<String, Object> obj) {
-		// TODO Auto-generated method stub
 		EventoAB evento = null;
 		
 		evento = new Evento();
@@ -39,8 +38,6 @@ public class DaoEvento extends DaoMemo<EventoAB>{
 
 	@Override
 	protected HashMap<Long, EventoAB> getDB() {
-		// TODO Auto-generated method stub
-		
 		return this.DB;
 	}
 

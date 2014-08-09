@@ -23,7 +23,6 @@ public class DaoIngresso extends DaoMemo<IngressoAB>{
 	
 	@Override
 	public IngressoAB create(HashMap<String, Object> obj) {
-		// TODO Auto-generated method stub
 		CodigoIF geradorCodigo = new CodigoAdapter();
 		
 		String codigo = null;
@@ -46,7 +45,6 @@ public class DaoIngresso extends DaoMemo<IngressoAB>{
 
 	@Override
 	protected HashMap<Long, IngressoAB> getDB() {
-		// TODO Auto-generated method stub
 		return this.DB;
 	}
 	
