@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import infra.DaoAbstractFactory;
 import infra.DaoUsuario;
 import util.EmailException;
 import util.IdadeException;
@@ -24,20 +25,41 @@ import business.model.UsuarioAB;
  *
  * @author ygor
  */
-public class UsuarioController{
-    
-    public void create (String nome, String email, int idade, String cpf) throws EmailException, IdadeException, LoginException, NomeException, SenhaException{
-        validaNome(nome);
-        validaEmail(email);
-        validaIdade(idade);
+public class UsuarioController implements UsuarioControllerIF{
+
+	@Override
+	public Long create(HashMap<String, Object> objeto) throws EmailException, IdadeException, LoginException, NomeException, SenhaException{
+		validaNome((String) objeto.get("nome"));
+        validaEmail((String) objeto.get("email"));
+        validaIdade((int) objeto.get("idade"));
         
-        HashMap<String, Object> newUser = new HashMap<String, Object>();
-        newUser.put("nome", nome);
-        newUser.put("email", email);
-        newUser.put("idade", idade);
-        newUser.put("cpf", cpf);
-        DaoUsuario.getInstance().create(newUser);
-    }
+        UsuarioAB newUser = (UsuarioAB) DaoAbstractFactory.getInstance(UsuarioAB.class).create(objeto);
+        
+		return newUser.getId();
+	}
+
+	@Override
+	public void update(Long id, HashMap<String, Object> objeto) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(Long id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public UsuarioAB[] listAll(Long offset, Long max) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UsuarioAB[] listAll() {
+    	return (UsuarioAB[]) DaoAbstractFactory.getInstance(UsuarioAB.class).listAll().toArray();
+	}
     
     public UsuarioAB get(Long id){
     	HashMap<String, Object> query = new HashMap<String, Object>();
@@ -45,10 +67,6 @@ public class UsuarioController{
     	return DaoUsuario.getInstance().findOneBy(query);
     }
     
-    public List<UsuarioAB> listAll(){
-    	return DaoUsuario.getInstance().listAll();
-    }
-        
     public void validaNome(String nome) throws NomeException{
         int nomeLen = nome.length();
         
