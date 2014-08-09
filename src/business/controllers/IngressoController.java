@@ -1,7 +1,9 @@
 package business.controllers;
 
+import infra.DaoAbstractFactory;
 import infra.DaoIngresso;
 
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 
@@ -9,41 +11,30 @@ import util.DataDeValidadeException;
 import util.PrecoException;
 import business.model.IngressoAB;
 
-public class IngressoController {
+public class IngressoController implements IngressoControllerIF{
 	
-	public String create (Long idEvento, Long idUsuario, Double valor, Calendar dataDeValidade, Boolean utilizado) throws PrecoException, DataDeValidadeException{
-		validaValor(valor);
-		validaDataDeValidade(dataDeValidade);
-		
-		HashMap<String, Object> newIngresso = new HashMap<String, Object>();
-        newIngresso.put("idEvento", idEvento);
-        newIngresso.put("idUsuario", idUsuario);
-        newIngresso.put("valor", valor);
-        newIngresso.put("dataDeValidade", dataDeValidade);
-        IngressoAB i = DaoIngresso.getInstance().create(newIngresso);
-        return i.getCodigo();
+	public Long create (HashMap<String, Object> objeto) throws PrecoException, DataDeValidadeException{
+		validaValor(objeto.get("valor"));
+		validaDataDeValidade(objeto.get("dataDeValidade"));
+		IngressoAB i = (IngressoAB) DaoAbstractFactory.getInstance(IngressoAB.class).create(objeto);
+        return i.getId();
     }
 	
-	public void update (Long id, Long idEvento, Long idUsuario, Double valor, Calendar dataDeValidade, Boolean utilizado) throws PrecoException, DataDeValidadeException{
-		validaValor(valor);
-		validaDataDeValidade(dataDeValidade);
+	public void update (Long id, HashMap<String, Object> objeto) throws PrecoException, DataDeValidadeException{
+		validaValor(objeto.get("valor"));
+		validaDataDeValidade(objeto.get("dataDeValidade"));
 		
-		HashMap<String, Object> newIngresso = new HashMap<String, Object>();
-        newIngresso.put("idEvento", idEvento);
-        newIngresso.put("idUsuario", idUsuario);
-        newIngresso.put("valor", valor);
-        newIngresso.put("dataDeValidade", dataDeValidade);
-        DaoIngresso.getInstance().update(id, get(create(idEvento, idUsuario, valor, dataDeValidade, utilizado))); //isso para nao fazer o controller conhecer o modelo
+		DaoAbstractFactory.getInstance(IngressoAB.class).update(id, objeto);
 	}
 	
 	public void delete(Long id){
-		DaoIngresso.getInstance().delete(id);
+		DaoAbstractFactory.getInstance(IngressoAB.class).delete(id);
 	}
 	
-	public IngressoAB get(String codigo){
+	public IngressoAB get(Long id){
 		HashMap<String, Object> query = new HashMap<String, Object>();
-    	query.put("codigo", codigo);
-    	return DaoIngresso.getInstance().findOneBy(query);
+    	query.put("id", id);
+    	return (IngressoAB) DaoAbstractFactory.getInstance(IngressoAB.class).findOneBy(query);
 	}
 	
 	public String geraQRCode(String codigo){
@@ -52,17 +43,31 @@ public class IngressoController {
 		return gerador.geraQRCode(codigo);
 	}
 	
-	public void validaValor(Double valor) throws PrecoException{
-		if(valor < 0){
+	public void validaValor(Object valor) throws PrecoException{
+		
+		if((Double) valor < 0){
 			throw new PrecoException("O Valor do Ingresso deve ser positivo!");
 		}
 		
 	}
 	
-	public void validaDataDeValidade(Calendar dataDeValidade) throws DataDeValidadeException{ //determinar hora minuto e segundo da validade de um ingresso
+	public void validaDataDeValidade(Object dataDeValidade1) throws DataDeValidadeException{ //determinar hora minuto e segundo da validade de um ingresso
+		Calendar dataDeValidade = (Calendar) dataDeValidade1;
 		if((dataDeValidade != null) && dataDeValidade.before(Calendar.getInstance())){
 			throw new DataDeValidadeException("A Data de Validade do Ingresso já foi ultrapassada!");
 		}
+	}
+		
+	@Override
+	public IngressoAB[] listAll(Long offset, Long max) {
+		// TODO Auto-generated method stub
+		 return Arrays.copyOf(DaoAbstractFactory.getInstance(IngressoAB.class).listAll(offset, max).toArray(),DaoAbstractFactory.getInstance(IngressoAB.class).listAll().toArray().length,IngressoAB[].class);
+	}
+
+	@Override
+	public IngressoAB[] listAll() {
+		// TODO Auto-generated method stub
+		return Arrays.copyOf(DaoAbstractFactory.getInstance(IngressoAB.class).listAll().toArray(),DaoAbstractFactory.getInstance(IngressoAB.class).listAll().toArray().length,IngressoAB[].class);
 	}
 	
 }

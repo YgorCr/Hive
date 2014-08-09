@@ -10,9 +10,11 @@ import business.model.IngressoAB;
 public class DaoIngresso extends DaoMemo<IngressoAB>{
 	private HashMap<Long, IngressoAB> DB;
 	private static DaoIngresso dao;
-
+	private Long genID;
+	
 	private DaoIngresso() {
 		this.DB = new HashMap<Long, IngressoAB>();
+		genID = 0L;
 	}
 	
 	public static DaoIF<IngressoAB> getInstance(){
@@ -36,6 +38,7 @@ public class DaoIngresso extends DaoMemo<IngressoAB>{
 		}while(ingresso != null);
 		
 		obj.put("codigo", geradorCodigo.geraCodigo());
+		obj.put("id", this.genID++);
 		ingresso = new Ingresso();
 		this.setCampos(obj, ingresso);
 		this.getDB().put(ingresso.getId(), ingresso);
