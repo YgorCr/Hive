@@ -13,7 +13,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import infra.DaoAbstractFactory;
-import infra.DaoUsuario;
 import util.EmailException;
 import util.IdadeException;
 import util.LoginException;
@@ -42,30 +41,27 @@ public class UsuarioController implements UsuarioControllerIF{
 	public void update(Long id, HashMap<String, Object> objeto) {
 		DaoAbstractFactory.getInstance(UsuarioAB.class).update(id, objeto);
 	}
-
+	
+	@Override
+	public UsuarioAB get(Long id){
+    	return (UsuarioAB) DaoAbstractFactory.getInstance(UsuarioAB.class).get(id);
+	}
+	
 	@Override
 	public void delete(Long id) {
-		// TODO Auto-generated method stub
-		
+		DaoAbstractFactory.getInstance(UsuarioAB.class).delete(id);
 	}
 
 	@Override
 	public UsuarioAB[] listAll(Long offset, Long max) {
-		// TODO Auto-generated method stub
-		return null;
+		return (UsuarioAB[]) DaoAbstractFactory.getInstance(UsuarioAB.class).listAll(max, offset).toArray();
 	}
 
 	@Override
 	public UsuarioAB[] listAll() {
     	return (UsuarioAB[]) DaoAbstractFactory.getInstance(UsuarioAB.class).listAll().toArray();
 	}
-    
-    public UsuarioAB get(Long id){
-    	HashMap<String, Object> query = new HashMap<String, Object>();
-    	query.put("id", id);
-    	return DaoUsuario.getInstance().findOneBy(query);
-    }
-    
+	
     public void validaNome(String nome) throws NomeException{
         int nomeLen = nome.length();
         
