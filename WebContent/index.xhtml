@@ -1,14 +1,14 @@
-<html xmlns="http://www.w3.org/1999/xhtml"  
-    xmlns:h="http://java.sun.com/jsf/html"  
-    xmlns:f="http://java.sun.com/jsf/core"  
-    xmlns:p="http://primefaces.org/ui">  
-  
-    <h:head>  
-  
-    </h:head>  
-      
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+    
+    <h:head>
+    </h:head>
+    
     <h:body>  
-	    <h:form>          
+	    <h:form>
+	    	hello world!
 		    <p:growl id="messages" showDetail="true" />
 		 
 		    <p:tieredMenu style="width:200px">
@@ -19,7 +19,7 @@
 		        <p:submenu label="Non-Ajax Menuitem" icon="ui-icon-newwin">
 		            <p:menuitem value="Delete" actionListener="#{menuview.delete}" update="messages" ajax="false" icon="ui-icon-close" />
 		        </p:submenu>
-		        <p:separator />
+		        <p:separator/>
 		        <p:submenu label="Navigations" icon="ui-icon-extlink">
 		            <p:submenu label="Prime Links">
 		                <p:menuitem value="Prime" url="http://www.prime.com.tr" title="xxx" />
@@ -29,7 +29,7 @@
 		        </p:submenu>
 		    </p:tieredMenu>
 		 
-		    <p:separator />
+		    <p:separator/>
 		 
 		    <p:commandButton id="dynaButton" value="Show" type="button" icon="ui-icon-extlink" />
 		    <p:tieredMenu overlay="true" trigger="dynaButton" my="left top" at="left bottom" style="width:200px">
