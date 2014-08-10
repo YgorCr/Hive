@@ -19,7 +19,7 @@ public class UsuarioBean {
 	public String getNome(){
 		return usuario.getNome();
 	}
-
+	
 	public String getEmail(){
 		return usuario.getEmail();
 	}
@@ -35,11 +35,11 @@ public class UsuarioBean {
 	public String getTelefone(){
 		return usuario.getTelefone();
 	}
-
+	
 	public String getIdade(){
 		return usuario.getIdade().toString();
 	}
-		
+	
 	public UsuarioAB[] getList(){
 		this.pagina = controller.listAll();
 		
