@@ -35,12 +35,33 @@ public class Init {
 	
 	private void initUsuarios(){
 		HashMap<String, Object> user = new HashMap<String, Object>();
-		user.put("nome", "igorrr");
-		user.put("idade", 25);
-		user.put("email", "igor@email.com");
-		
+
 		try {
+			user.put("nome", "usuarioA");
+			user.put("idade", 18);
+			user.put("email", "usuarioA@email.com");
 			userController.create(user);
+			
+			user.put("nome", "usuarioB");
+			user.put("idade", 19);
+			user.put("email", "usuarioB@email.com");
+			userController.create(user);
+			
+			user.put("nome", "usuarioC");
+			user.put("idade", 20);
+			user.put("email", "usuarioC@email.com");
+			userController.create(user);
+			
+			user.put("nome", "usuarioD");
+			user.put("idade", 21);
+			user.put("email", "usuarioD@email.com");
+			userController.create(user);
+			
+			user.put("nome", "usuarioE");
+			user.put("idade", 22);
+			user.put("email", "usuarioE@email.com");
+			userController.create(user);
+			
 		} catch (EmailException | IdadeException | LoginException
 				| NomeException | SenhaException e) {
 			e.printStackTrace();
