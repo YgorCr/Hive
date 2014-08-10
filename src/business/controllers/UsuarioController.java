@@ -38,7 +38,11 @@ public class UsuarioController implements UsuarioControllerIF{
 	}
 
 	@Override
-	public void update(Long id, HashMap<String, Object> objeto) {
+	public void update(Long id, HashMap<String, Object> objeto) throws EmailException, IdadeException, LoginException, NomeException, SenhaException{
+		validaNome((String) objeto.get("nome"));
+        validaEmail((String) objeto.get("email"));
+        validaIdade((int) objeto.get("idade"));
+		
 		DaoAbstractFactory.getInstance(UsuarioAB.class).update(id, objeto);
 	}
 	

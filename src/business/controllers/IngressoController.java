@@ -60,14 +60,12 @@ public class IngressoController implements IngressoControllerIF{
 		
 	@Override
 	public IngressoAB[] listAll(Long offset, Long max) {
-		// TODO Auto-generated method stub
-		 return Arrays.copyOf(DaoAbstractFactory.getInstance(IngressoAB.class).listAll(offset, max).toArray(),DaoAbstractFactory.getInstance(IngressoAB.class).listAll().toArray().length,IngressoAB[].class);
+		 return (IngressoAB[]) DaoAbstractFactory.getInstance(IngressoAB.class).listAll(offset, max).toArray();
 	}
 
 	@Override
 	public IngressoAB[] listAll() {
-		// TODO Auto-generated method stub
-		return Arrays.copyOf(DaoAbstractFactory.getInstance(IngressoAB.class).listAll().toArray(),DaoAbstractFactory.getInstance(IngressoAB.class).listAll().toArray().length,IngressoAB[].class);
+		return (IngressoAB[]) DaoAbstractFactory.getInstance(IngressoAB.class).listAll().toArray();
 	}
 	
 }
