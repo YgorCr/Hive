@@ -2,11 +2,9 @@ package infra;
 
 public class DaoAbstractFactory {
 	public static DaoIF<?> getInstance(Class<?> classe){
-		System.out.println(classe.getName());
+		String classeName = classe.getName().split("\\.")[classe.getName().split("\\.").length-1];
 		
-		System.out.println(classe.getName().split(".").length);
-		
-		switch(classe.getName()){
+		switch(classeName){
 			case "UsuarioAB":
 				return DaoUsuario.getInstance();
 			case "IngressoAB":
