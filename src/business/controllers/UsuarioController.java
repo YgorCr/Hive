@@ -58,12 +58,14 @@ public class UsuarioController implements UsuarioControllerIF{
 
 	@Override
 	public UsuarioAB[] listAll(Long offset, Long max) {
-		return (UsuarioAB[]) DaoAbstractFactory.getInstance(UsuarioAB.class).listAll(max, offset).toArray();
+		List<?> all = DaoAbstractFactory.getInstance(UsuarioAB.class).listAll(max, offset);
+    	return (UsuarioAB[]) all.toArray(new UsuarioAB[all.size()]);
 	}
 
 	@Override
 	public UsuarioAB[] listAll() {
-    	return (UsuarioAB[]) DaoAbstractFactory.getInstance(UsuarioAB.class).listAll().toArray();
+		List<?> all = DaoAbstractFactory.getInstance(UsuarioAB.class).listAll();
+    	return (UsuarioAB[]) all.toArray(new UsuarioAB[all.size()]);
 	}
 	
     public void validaNome(String nome) throws NomeException{
