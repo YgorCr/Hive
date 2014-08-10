@@ -7,28 +7,62 @@
     </h:head>
     
     <h:body>  
-		<h1>JSF 2 dataTable example</h1>
- 
-    		<h:dataTable value="#{ingresso.list}" var="o"
-    			styleClass="order-table"
-    			headerClass="order-table-header"
-    			rowClasses="order-table-odd-row,order-table-even-row"
-    		>
- 
-    			<h:column>
-    				<!-- column header -->
-    				<f:facet name="header">Order No</f:facet>
-    				<!-- row record -->
-    				#{o.id}
-    			</h:column>
- 
-    			<h:column>
-    				<f:facet name="header">Product Name</f:facet>
-    				#{o.idUsuario}
-    			</h:column>
-     			
-    		</h:dataTable>
- 
-      
+	    <h:form>
+	    	hello world!
+		    <p:growl id="messages" showDetail="true" />
+		 
+		    <p:tieredMenu style="width:200px">
+		        <p:submenu label="Ingressos" icon="ui-icon-folder-open">
+		        	<p:menuitem value="ListAll" actionListener="#{menuview.save}" update="messages" icon="ui-icon-document" />
+		            <p:menuitem value="Update" actionListener="#{menuview.update}" update="messages" icon="ui-icon-arrowrefresh-1-w" />
+		        </p:submenu>
+		        <p:submenu label="Non-Ajax Menuitem" icon="ui-icon-newwin">
+		            <p:menuitem value="Delete" actionListener="#{menuview.delete}" update="messages" ajax="false" icon="ui-icon-close" />
+		        </p:submenu>
+		        <p:separator/>
+		        <p:submenu label="Navigations" icon="ui-icon-extlink">
+		            <p:submenu label="Prime Links">
+		                <p:menuitem value="Prime" url="http://www.prime.com.tr" title="xxx" />
+		                <p:menuitem value="PrimeFaces" url="http://www.primefaces.org" />
+		            </p:submenu>
+		            
+		        </p:submenu>
+		    </p:tieredMenu>
+		 
+		    <p:separator/>
+		    
+		    <p:dataTable value="#{ingresso.list}" var="one">
+		    	<p:column>
+		    		<f:facet name="header">Ingresso ID</f:facet>
+		    		#{one.id}
+		    	</p:column>
+		    	
+		    	<p:column>
+		    		<f:facet name="header">Codigo</f:facet>
+		    		#{one.codigo}
+		    	</p:column>
+		    </p:dataTable>
+		    
+		    <p:separator/>
+		 
+		    <p:commandButton id="dynaButton" value="Show" type="button" icon="ui-icon-extlink" />
+		    <p:tieredMenu overlay="true" trigger="dynaButton" my="left top" at="left bottom" style="width:200px">
+		        <p:submenu label="Ajax Menuitems">
+		            <p:menuitem value="Save" actionListener="#{menuview.save}" update="messages" icon="ui-icon-disk" />
+		            <p:menuitem value="Update" actionListener="#{menuview.update}" update="messages" icon="ui-icon-arrowrefresh-1-w" />
+		        </p:submenu>
+		        <p:submenu label="Non-Ajax Menuitem">
+		            <p:menuitem value="Delete" actionListener="#{menuview.delete}" update="messages" ajax="false" icon="ui-icon-close" />
+		        </p:submenu>
+		        <p:submenu label="Navigations" icon="ui-icon-extlink">
+		            <p:submenu label="Prime Links">
+		                <p:menuitem value="Prime" url="http://www.prime.com.tr" />
+		                <p:menuitem value="PrimeFaces" url="http://www.primefaces.org" />
+		            </p:submenu>
+		            
+		        </p:submenu>
+		    </p:tieredMenu>
+		</h:form>  
+              
     </h:body>  
 </html>  
