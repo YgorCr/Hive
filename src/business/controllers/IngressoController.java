@@ -65,7 +65,10 @@ public class IngressoController implements IngressoControllerIF{
 
 	@Override
 	public IngressoAB[] listAll() {
-		return (IngressoAB[]) DaoAbstractFactory.getInstance(IngressoAB.class).listAll().toArray();
+		//System.out.println("a\n"+"a\n"+"a\n"+"a\n"+"a\n"+"a\n"+"a\n"+"a\n"+"a\n");
+		Object ar[] = DaoAbstractFactory.getInstance(IngressoAB.class).listAll().toArray();
+		//System.out.println(Arrays.copyOf(ar, ar.length, IngressoAB[].class) == null);
+		return Arrays.copyOf(ar, ar.length, IngressoAB[].class);
 	}
 	
 }
