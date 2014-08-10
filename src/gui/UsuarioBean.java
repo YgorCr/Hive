@@ -1,7 +1,14 @@
 package gui;
 
+import java.util.HashMap;
+
 import javax.faces.bean.ManagedBean;
 
+import util.EmailException;
+import util.IdadeException;
+import util.LoginException;
+import util.NomeException;
+import util.SenhaException;
 import business.model.UsuarioAB;
 import business.controllers.UsuarioControllerIF;
 import business.controllers.UsuarioController;
@@ -12,36 +19,27 @@ public class UsuarioBean {
 	private UsuarioAB[] pagina;
 	private UsuarioControllerIF controller = new UsuarioController();
 	
-	public String getId(){
-		return usuario.getId().toString();
-	}
-	
-	public String getNome(){
-		return usuario.getNome();
-	}
-	
-	public String getEmail(){
-		return usuario.getEmail();
-	}
-	
-	public String getCpf(){
-		return usuario.getCpf();
-	}
-	
-	public String getSexo(){
-		return usuario.getSexo();
-	}
-	
-	public String getTelefone(){
-		return usuario.getTelefone();
-	}
-	
-	public String getIdade(){
-		return usuario.getIdade().toString();
+	public int getInit2(){
+		HashMap<String, Object> user = new HashMap<String, Object>();
+		user.put("nome", "igorrr");
+		user.put("idade", 25);
+		user.put("email", "igor@email.com");
+		
+		try {
+			controller.create(user);
+		} catch (EmailException | IdadeException | LoginException
+				| NomeException | SenhaException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return 2;
 	}
 	
 	public UsuarioAB[] getList(){
 		this.pagina = controller.listAll();
+		
+		System.out.println(this.pagina.length);
 		
 		return this.pagina;
 	}
