@@ -70,8 +70,8 @@ public class Init {
 	
 	private void initIngressos(){
 		HashMap<String, Object> obj = new HashMap<String, Object>();
-		obj.put("idEvento", 1);
-		obj.put("valor", 3.25);
+		obj.put("idEvento", 1L);
+		obj.put("valor", (Double) 3.25);
 		Calendar umDiaQualquer = Calendar.getInstance();
 		umDiaQualquer.set(Calendar.YEAR, 2015);
 		obj.put("dataDeValidade", umDiaQualquer);
