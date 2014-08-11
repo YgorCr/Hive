@@ -64,27 +64,16 @@
 				 <b:column col-md="9">
 					<b:panel>
 						<h:form>
+							<h:outputText value="Nome:"/>
+					        <b:inputText value="#{usuario.nome}" ></b:inputText>
 					        <h:outputText value="e-mail:"/>
-					        <b:inputText>
+					        <b:inputText value="#{usuario.email}">
 					            <f:facet name="prepend">
 					                <h:outputText value="@" />
 					            </f:facet>
 					        </b:inputText>
-					        <h:outputText value="Amount:"/>
-					        <b:inputText>
-					            <f:facet name="append">
-					                <h:outputText value=".00" />
-					            </f:facet>
-					        </b:inputText>
-					        <h:outputText value="Price:"/>
-					        <b:inputText>
-					            <f:facet name="prepend">
-					                <h:outputText value="$" />
-					            </f:facet>
-					            <f:facet name="append">
-					                <h:outputText value=".00" />
-					            </f:facet>
-					        </b:inputText>
+					        <br></br>
+					        <b:commandButton value="Submit" action="usuario.create"></b:commandButton>
 						</h:form>
 					</b:panel>
 				</b:column>
