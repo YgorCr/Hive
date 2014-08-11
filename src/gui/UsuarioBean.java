@@ -45,8 +45,7 @@ public class UsuarioBean {
 		return null;
 	}
 	
-	public String update(){
-		Long id = this.user.getId();
+	public String update(Long id){
 		HashMap<String, Object> oldUser = new HashMap<String, Object>();
 		
 		oldUser.put("nome", this.user.getNome());
@@ -64,6 +63,12 @@ public class UsuarioBean {
 		}
 		
 		return "show?faces-redirect=true&id=" + id;
+	}
+	
+	public String delete(Long id){
+		this.controller.delete(id);
+		
+		return "/index?faces-redirect=true";
 	}
 	
 	public UsuarioAB[] getList(){

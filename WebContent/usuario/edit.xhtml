@@ -88,7 +88,7 @@
 					        </b:inputText>
 					        <br/>
 					        <b:buttonGroup>
-					        	<b:commandButton value="Salvar" action="#{usuario.update}">
+					        	<b:commandButton value="Salvar" action="#{usuario.update(usuario.id)}">
 					        	</b:commandButton>
 					        	<b:button value="Cancelar" outcome="show?id=#{param['id']}"/>
 					        </b:buttonGroup>

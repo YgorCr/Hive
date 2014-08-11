@@ -65,6 +65,7 @@
 					<b:panel>
 						<h:form>
 							#{usuario.show(param['id'])}
+							<h:inputHidden value="#{usuario.id}"/>
 							<h:outputText value="Nome:"/>
 					        <b:inputText value="#{usuario.nome}" ></b:inputText>
 					        <h:outputText value="e-mail:"/>
@@ -88,7 +89,7 @@
 					        <br></br>
 					        <b:buttonGroup>
 						        <b:button value="Edit#{param['id']}" look="success" outcome="edit?id=#{param['id']}"></b:button>
-						        <b:commandButton value="Delete" look="danger"></b:commandButton>
+						        <b:commandButton value="Delete" look="danger" action="#{usuario.delete(usuario.id)}"></b:commandButton>
 					        </b:buttonGroup>
 						</h:form>
 					</b:panel>
