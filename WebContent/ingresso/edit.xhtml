@@ -65,6 +65,7 @@
 					<b:panel>
 						<h:form>
 							#{ingresso.show(param['id'])}
+							
 							<h:outputText value="Valor:"/>
 					        <b:inputText value="#{ingresso.valor}" ></b:inputText>
 					        <h:outputText value="IDUsuario:"/>
@@ -72,13 +73,15 @@
 					        <h:outputText value="IDEvento:"/>
 					        <b:inputText value="#{ingresso.idEvento}"></b:inputText>
 					        <br></br>
-					        
+					        <b:column>	
+					        	<b:commandButton value="Submit" action="#{ingresso.update()}" ></b:commandButton>
+							</b:column>
+							<b:column>
+								<b:button value="Cancel" outcome="show?id=#{param['id']}" ></b:button>
+							</b:column>
 						</h:form>
 					</b:panel>
 				</b:column>
-			</b:row>
-			<b:row>
-				<b:button value="Edit" outcome="edit.jsp?id=#{param['id']}"></b:button>
 			</b:row>
         </b:container>
         

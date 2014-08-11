@@ -2,8 +2,11 @@ package gui;
 
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import util.DataDeValidadeException;
 import util.PrecoException;
@@ -12,7 +15,7 @@ import business.controllers.IngressoControllerIF;
 import business.model.EventoAB;
 import business.model.IngressoAB;
 import business.model.UsuarioAB;
-
+@ViewScoped
 @ManagedBean(name = "ingresso")
 public class IngressoBean {
 	private IngressoAB ingresso = new IngressoAB() {
@@ -102,11 +105,32 @@ public class IngressoBean {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "/index2?faces-redirect=true";
+		return "list?faces-redirect=true";
+	}
+	
+	public String update(){
+		//System.out.println(ingresso.getId()+" "+ingresso.getValor() + " " +ingresso.getIdEvento() + " "+ ingresso.getIdUsuario() );
+		
+		HashMap<String,Object> objeto = new HashMap<String, Object>();
+		objeto.put("valor", ingresso.getValor());
+		Calendar data = Calendar.getInstance();
+		data.set(Calendar.YEAR, 2015);
+		objeto.put("dataDeValidade", data); //descobrir a data que vem no form
+		objeto.put("idEvento", ingresso.getIdEvento()); //pegar no futuro um id real
+		objeto.put("idUsuario", ingresso.getIdUsuario()); //pegar usuario logado
+		try {
+			controller.update(ingresso.getId(),objeto);
+		} catch (PrecoException | DataDeValidadeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+		return "list?faces-redirect=true";
 	}
 	
 	public void show(String id){
 		this.ingresso = controller.get(Long.parseLong(id));
+		System.out.println("ID "+controller.get(Long.parseLong(id)).getId());
 	}
 	
 }
