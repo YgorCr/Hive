@@ -64,6 +64,7 @@
 				 <b:column col-md="9">
 					<b:panel>
 						<h:form>
+							#{usuario.show(param['id'])}
 							<h:outputText value="Nome:"/>
 					        <b:inputText value="#{usuario.nome}" ></b:inputText>
 					        <h:outputText value="e-mail:"/>
@@ -84,8 +85,6 @@
 							<h:outputText value="Sexo:"/>
 					        <b:inputText value="#{usuario.sexo}">
 					        </b:inputText>
-					        <br></br>
-					        <b:commandButton value="Submit" action="#{usuario.create}"></b:commandButton>
 						</h:form>
 					</b:panel>
 				</b:column>

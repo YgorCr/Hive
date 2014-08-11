@@ -18,47 +18,39 @@ public class UsuarioBean {
 	private UsuarioAB user = new UsuarioAB() {};
 	private UsuarioControllerIF controller = new UsuarioController();
 	
-	public String create(){	
-//		public Long create(String nome, String email, String telefone, String idade, String cpf, String sexo){
+	public String create(){
 		HashMap<String, Object> newUser = new HashMap<String, Object>();
-//		newUser.put("nome", nome);
-//		newUser.put("email", email);
-//		newUser.put("telefone", telefone);
-//		newUser.put("idade", Long.parseLong(idade));
-//		newUser.put("cpf", cpf);
-//		newUser.put("sexo", sexo);
-		newUser.put("nome", user.getNome());
-		newUser.put("email", user.getEmail());
-		newUser.put("telefone", user.getTelefone());
-		newUser.put("idade", user.getIdade());
-		newUser.put("cpf", user.getCpf());
-		newUser.put("sexo", user.getSexo());
+		
+		newUser.put("nome", this.user.getNome());
+		newUser.put("email", this.user.getEmail());
+		newUser.put("telefone", this.user.getTelefone());
+		newUser.put("idade", this.user.getIdade());
+		newUser.put("cpf", this.user.getCpf());
+		newUser.put("sexo", this.user.getSexo());
 		
 		Long id = null;
 		try {
-			id = controller.create(newUser);
+			id = this.controller.create(newUser);
 		} catch (EmailException | IdadeException | LoginException
 				| NomeException | SenhaException e) {
 			e.printStackTrace();
 		}
 		
-		System.out.println("redirecionando...");
-		
-		return "index";
+		return "show?faces-redirect=true&id=" + id;
 	}
 	
 	public String show(Long id){
-		this.user = controller.get(id);
+		this.user = this.controller.get(id);
 		
 		return null;
 	}
 	
 	public UsuarioAB[] getList(){
-		return controller.listAll();
+		return this.controller.listAll();
 	}
 	
 	public UsuarioAB[] getList(Long max, Long offset){
-		return controller.listAll(offset, max);
+		return this.controller.listAll(offset, max);
 	}
 	
 	public void setNome(String nome){
