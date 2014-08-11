@@ -111,7 +111,7 @@ public abstract class DaoMemo<T> implements DaoIF<T>{
 			} catch (IllegalAccessException | IllegalArgumentException
 					| InvocationTargetException | NoSuchMethodException
 					| SecurityException e) {
-				System.out.println("Adicione método set para todos os campos do modelo!!!");
+				System.out.println("Adicione método set para todos os campos do modelo!!! Método \"" + setMethodName + "(" + campo.getType().getCanonicalName() + ")\" não encontrado.");
 				e.printStackTrace();
 			}
 		}
