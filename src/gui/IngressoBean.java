@@ -128,6 +128,12 @@ public class IngressoBean {
 		return "list?faces-redirect=true";
 	}
 	
+	public String delete(){
+		controller.delete(ingresso.getId());
+		
+		return "list?faces-redirect=true";
+	}
+	
 	public void show(String id){
 		this.ingresso = controller.get(Long.parseLong(id));
 		System.out.println("ID "+controller.get(Long.parseLong(id)).getId());
