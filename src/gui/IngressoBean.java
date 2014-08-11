@@ -105,4 +105,8 @@ public class IngressoBean {
 		return "/index2?faces-redirect=true";
 	}
 	
+	public void show(String id){
+		this.ingresso = controller.get(Long.parseLong(id));
+	}
+	
 }

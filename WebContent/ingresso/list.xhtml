@@ -9,29 +9,9 @@
     
     <h:body>  
 	    <h:form>
-	    	hello world!
+	    	
 		    <p:growl id="messages" showDetail="true" />
-		 	<b:button value="aaa"></b:button>
-		    <p:tieredMenu style="width:200px">
-		        <p:submenu label="Ingressos" icon="ui-icon-folder-open">
-		        	<p:menuitem value="ListAll" actionListener="#{menuview.save}" update="messages" icon="ui-icon-document" />
-		            <p:menuitem value="Update" actionListener="#{menuview.update}" update="messages" icon="ui-icon-arrowrefresh-1-w" />
-		        </p:submenu>
-		        <p:submenu label="Non-Ajax Menuitem" icon="ui-icon-newwin">
-		            <p:menuitem value="Delete" actionListener="#{menuview.delete}" update="messages" ajax="false" icon="ui-icon-close" />
-		        </p:submenu>
-		        <p:separator/>
-		        <p:submenu label="Navigations" icon="ui-icon-extlink">
-		            <p:submenu label="Prime Links">
-		                <p:menuitem value="Prime" url="http://www.prime.com.tr" title="xxx" />
-		                <p:menuitem value="PrimeFaces" url="http://www.primefaces.org" />
-		            </p:submenu>
-		            
-		        </p:submenu>
-		    </p:tieredMenu>
-		 
-		    <p:separator/>
-		    
+		 	
 		    <p:dataTable value="#{ingresso.list}" var="one">
 		    	<p:column>
 		    		<f:facet name="header">Ingresso ID</f:facet>
@@ -56,6 +36,11 @@
 		    	<p:column>
 		    		<f:facet name="header">Valor</f:facet>
 		    		#{one.valor}
+		    	</p:column>
+		    	
+		    	<p:column>
+		    		<f:facet name="header">Valido até:</f:facet>
+		    		#{one.dataDeValidade}
 		    	</p:column>
 		    </p:dataTable>
 		    
