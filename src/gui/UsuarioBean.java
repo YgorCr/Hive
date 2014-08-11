@@ -45,12 +45,37 @@ public class UsuarioBean {
 		return null;
 	}
 	
+	public String update(){
+		Long id = this.user.getId();
+		HashMap<String, Object> oldUser = new HashMap<String, Object>();
+		
+		oldUser.put("nome", this.user.getNome());
+		oldUser.put("email", this.user.getEmail());
+		oldUser.put("telefone", this.user.getTelefone());
+		oldUser.put("idade", this.user.getIdade());
+		oldUser.put("cpf", this.user.getCpf());
+		oldUser.put("sexo", this.user.getSexo());
+				
+		try {
+			this.controller.update(id, oldUser);
+		} catch (EmailException | IdadeException | LoginException
+				| NomeException | SenhaException e) {
+			e.printStackTrace();
+		}
+		
+		return "show?faces-redirect=true&id=" + id;
+	}
+	
 	public UsuarioAB[] getList(){
 		return this.controller.listAll();
 	}
 	
 	public UsuarioAB[] getList(Long max, Long offset){
 		return this.controller.listAll(offset, max);
+	}
+	
+	public void setId(String id){
+		this.user.setId(Long.parseLong(id));
 	}
 	
 	public void setNome(String nome){

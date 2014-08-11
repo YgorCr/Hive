@@ -33,7 +33,7 @@
                 </div>
                 <div class="form-group">
                     <b:inputText placeholder="Password" fieldSize="sm"/>
-                </div> 
+                </div>
                 #{' '}
                 <b:commandButton action="a" value="Login in" look="success" icon="chevron-right" iconAlign="right"/>
             </h:form>
@@ -65,7 +65,8 @@
 					<b:panel>
 						<h:form>
 							#{usuario.show(param['id'])}
-							<h:outputText value="Nome:"/>
+							<h:inputHidden value="#{usuario.id}"/>
+					        <h:outputText value="Nome:" />
 					        <b:inputText value="#{usuario.nome}" ></b:inputText>
 					        <h:outputText value="e-mail:"/>
 					        <b:inputText value="#{usuario.email}">
@@ -85,10 +86,11 @@
 							<h:outputText value="Sexo:"/>
 					        <b:inputText value="#{usuario.sexo}">
 					        </b:inputText>
-					        <br></br>
+					        <br/>
 					        <b:buttonGroup>
-						        <b:button value="Edit#{param['id']}" look="success" outcome="edit?id=#{param['id']}"></b:button>
-						        <b:commandButton value="Delete" look="danger"></b:commandButton>
+					        	<b:commandButton value="Salvar" action="#{usuario.update}">
+					        	</b:commandButton>
+					        	<b:button value="Cancelar" outcome="show?id=#{param['id']}"/>
 					        </b:buttonGroup>
 						</h:form>
 					</b:panel>
