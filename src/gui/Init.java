@@ -77,9 +77,9 @@ public class Init {
 		obj.put("dataDeValidade", umDiaQualquer);
 		try {
 			ingrController.create(obj);
-			ingrController.create(obj);
-			ingrController.create(obj);
-			ingrController.create(obj);
+			//ingrController.create(obj);
+			//ingrController.create(obj);
+			//ingrController.create(obj);
 		} catch (PrecoException e) {
 			// TODO Auto-generated catch block
 			System.out.println("NAOAAAAAAA");
