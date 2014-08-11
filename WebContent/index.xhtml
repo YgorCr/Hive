@@ -1,71 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
-    
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui">
     <h:head>
+        <title>Project Name</title>
+        <meta name="author" content="The Author"></meta>
+        
+        #{init.testeInit}
     </h:head>
-    
-    <h:body>  
-	    <h:form>
-	    	hello world!
-	    	
-	    	#{init.testeInit}
-	    	
-		    <p:growl id="messages" showDetail="true" />
-		 
-		    <p:tieredMenu style="width:200px">
-		        <p:submenu label="Ingressos" icon="ui-icon-folder-open">
-		        	<p:menuitem value="ListAll" actionListener="#{menuview.save}" update="messages" icon="ui-icon-document" />
-		            <p:menuitem value="Update" actionListener="#{menuview.update}" update="messages" icon="ui-icon-arrowrefresh-1-w" />
-		        </p:submenu>
-		        <p:submenu label="Non-Ajax Menuitem" icon="ui-icon-newwin">
-		            <p:menuitem value="Delete" actionListener="#{menuview.delete}" update="messages" ajax="false" icon="ui-icon-close" />
-		        </p:submenu>
-		        <p:separator/>
-		        <p:submenu label="Navigations" icon="ui-icon-extlink">
-		            <p:submenu label="Prime Links">
-		                <p:menuitem value="Prime" url="http://www.prime.com.tr" title="xxx" />
-		                <p:menuitem value="PrimeFaces" url="http://www.primefaces.org" />
-		            </p:submenu>
-		            
-		        </p:submenu>
-		    </p:tieredMenu>
-		 
-		    <p:separator/>
-		    
-		    <p:dataTable value="#{usuario.list}" var="one">
-		    	<p:column>
-		    		<f:facet name="header">User ID</f:facet>
-		    		#{one.id}
-		    	</p:column>
-		    	
-		    	<p:column>
-		    		<f:facet name="header">User name</f:facet>
-		    		#{one.nome}
-		    	</p:column>
-		    </p:dataTable>
-		    
-		    <p:separator/>
-		 
-		    <p:commandButton id="dynaButton" value="Show" type="button" icon="ui-icon-extlink" />
-		    <p:tieredMenu overlay="true" trigger="dynaButton" my="left top" at="left bottom" style="width:200px">
-		        <p:submenu label="Ajax Menuitems">
-		            <p:menuitem value="Save" actionListener="#{menuview.save}" update="messages" icon="ui-icon-disk" />
-		            <p:menuitem value="Update" actionListener="#{menuview.update}" update="messages" icon="ui-icon-arrowrefresh-1-w" />
-		        </p:submenu>
-		        <p:submenu label="Non-Ajax Menuitem">
-		            <p:menuitem value="Delete" actionListener="#{menuview.delete}" update="messages" ajax="false" icon="ui-icon-close" />
-		        </p:submenu>
-		        <p:submenu label="Navigations" icon="ui-icon-extlink">
-		            <p:submenu label="Prime Links">
-		                <p:menuitem value="Prime" url="http://www.prime.com.tr" />
-		                <p:menuitem value="PrimeFaces" url="http://www.primefaces.org" />
-		            </p:submenu>
-		            
-		        </p:submenu>
-		    </p:tieredMenu>
-		</h:form>  
-              
-    </h:body>  
-</html>  
+    <!-- Add 50px padding top to the body for the navbar -->
+    <h:body style="padding-top: 50px; padding-bottom: 20px;">
+        <b:navBar brand="Hive" brandHref="#" inverse="true" fixed="top">
+            <b:navbarLinks>
+                <b:navLink value="Link" href="#"></b:navLink>
+                <b:navLink value="Link" href="#"></b:navLink>
+                <b:dropMenu value="Dropdown">
+                    <b:navLink value="Action" href="#"></b:navLink>
+                    <b:navLink value="Another action" href="#"></b:navLink>
+                    <b:navLink value="Something else here" href="#"></b:navLink>
+                    <b:navLink></b:navLink>
+                    <b:navLink header="Nav header"></b:navLink>
+                    <b:navLink value="Separated link" href="#"></b:navLink>
+                    <b:navLink value="One more separated link" href="#"></b:navLink>
+                </b:dropMenu>
+            </b:navbarLinks>
+            <h:form styleClass="navbar-form navbar-right">
+                <div class="form-group">
+                    <b:inputText placeholder="Email" fieldSize="sm"/>
+                    <!--input type="text" class="form-control" placeholder="Search"/-->
+                </div>
+                <div class="form-group">
+                    <b:inputText placeholder="Password" fieldSize="sm"/>
+                </div> 
+                #{' '}
+                <b:commandButton action="a" value="Login in" look="success" icon="chevron-right" iconAlign="right"/>
+            </h:form>
+        </b:navBar>
+        <b:jumbotron>
+            <b:container>
+                <h1>Hello, join the Hive!</h1>
+                <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. 
+                   Use it as a starting point to create something more unique.
+                </p>
+                <p>
+                    <a href="https://github.com/TheCoder4eu/BootsFacesWeb/blob/master/web/examples/jumbotron.xhtml" class="btn btn-lg btn-info">View Page Source »</a>
+                </p>
+            </b:container>
+
+        </b:jumbotron>
+        <b:container>
+            <b:row>
+                <b:column col-md="4">
+                    <h2>Heading</h2>
+                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, 
+                       ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+                    <p><b:button outcome="" value="View details »"/></p>
+                </b:column>
+                <b:column col-md="4">
+                    <h2>Heading</h2>
+                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, 
+                       ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+                    <p><b:button outcome="" value="View details »"/></p>
+                </b:column>
+                <b:column col-md="4">
+                    <h2>Heading</h2>
+                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, 
+                       ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+                    <p><b:button outcome="" value="View details »"/></p>
+                </b:column>
+            </b:row>
+            <hr/>
+            <footer>
+            <p>© Company 2014</p>
+            </footer>
+        </b:container>
+
+    </h:body>
+</html>
