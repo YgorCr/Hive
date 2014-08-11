@@ -72,8 +72,21 @@
 					                <h:outputText value="@" />
 					            </f:facet>
 					        </b:inputText>
+							<h:outputText value="Telefone:"/>
+					        <b:inputText value="#{usuario.telefone}">
+					        </b:inputText>
+							<h:outputText value="Idade:"/>
+					        <b:inputText value="#{usuario.idade}">
+					        </b:inputText>
+							<h:outputText value="Cpf:"/>
+					        <b:inputText value="#{usuario.cpf}">
+					        </b:inputText>
+							<h:outputText value="Sexo:"/>
+					        <b:inputText value="#{usuario.sexo}">
+					        </b:inputText>
 					        <br></br>
-					        <b:commandButton value="Submit" action="usuario.create"></b:commandButton>
+					        <b:commandButton value="go to random page"
+					        							action="#{usuario.create}"></b:commandButton>
 						</h:form>
 					</b:panel>
 				</b:column>

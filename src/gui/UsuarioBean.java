@@ -18,7 +18,7 @@ public class UsuarioBean {
 	private UsuarioAB user = new UsuarioAB() {};
 	private UsuarioControllerIF controller = new UsuarioController();
 	
-	public Long create(){	
+	public String create(){	
 //		public Long create(String nome, String email, String telefone, String idade, String cpf, String sexo){
 		HashMap<String, Object> newUser = new HashMap<String, Object>();
 //		newUser.put("nome", nome);
@@ -27,10 +27,6 @@ public class UsuarioBean {
 //		newUser.put("idade", Long.parseLong(idade));
 //		newUser.put("cpf", cpf);
 //		newUser.put("sexo", sexo);
-		System.out.println("GREATE ops create");
-		System.out.println("email: " + this.user.getEmail());
-		System.out.println("nome: "+ this.user.getNome());
-		
 		newUser.put("nome", user.getNome());
 		newUser.put("email", user.getEmail());
 		newUser.put("telefone", user.getTelefone());
@@ -46,7 +42,9 @@ public class UsuarioBean {
 			e.printStackTrace();
 		}
 		
-		return id;
+		System.out.println("redirecionando...");
+		
+		return "index";
 	}
 	
 	public String show(Long id){
@@ -64,7 +62,6 @@ public class UsuarioBean {
 	}
 	
 	public void setNome(String nome){
-		System.out.println("set Working: " + nome);
 		this.user.setNome(nome);
 	}
 	
@@ -73,7 +70,6 @@ public class UsuarioBean {
 	}
 	
 	public void setEmail(String email){
-		System.out.println("set Working: " + email);
 		this.user.setEmail(email);
 	}
 	
@@ -94,12 +90,10 @@ public class UsuarioBean {
 	}
 	
 	public String getEmail(){
-		System.out.println("get Working: " + this.user.getEmail());
 		return this.user.getEmail();
 	}
 	
 	public String getNome(){
-		System.out.println("get Working: " + this.user.getNome());
 		return this.user.getNome();
 	}
 	
@@ -112,10 +106,10 @@ public class UsuarioBean {
 	}
 	
 	public String getIdade(){
-		return this.user.getIdade().toString();
+		return (this.user.getIdade() == null)?(""):(this.user.getIdade().toString());
 	}
 	
 	public String getId(){
-		return this.user.getId().toString();
+		return (this.user.getId() == null)?(""):(this.user.getId().toString());
 	}
 }
