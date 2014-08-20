@@ -9,9 +9,8 @@ public abstract class EventoAB implements EventoIF{
 	private String descricao;
 	private Calendar dataInicio;
 	private Calendar dataFim;
-	private String local;
 	private String endereco;
-	private Long idDoDono;								// id do Usuário dono do evento
+	private Long idDono;								// id do Usuário dono do evento
 	private LinkedList<Long> listaModeradores;			// ids dos moderadores
 	private LinkedList<Long> listaParticipantes;		// ids dos participantes
 	//private LinkedList<String> listaTickets;				// id dos Tickets do evento	
@@ -56,15 +55,7 @@ public abstract class EventoAB implements EventoIF{
 	public void setDataFim(Calendar dataFim) {
 		this.dataFim = dataFim;
 	}
-	
-	public String getLocal() {
-		return local;
-	}
-	
-	public void setLocal(String local) {
-		this.local = local;
-	}
-	
+
 	public String getEndereco() {
 		return endereco;
 	}
@@ -74,11 +65,11 @@ public abstract class EventoAB implements EventoIF{
 	}
 	
 	public Long getIdDoDono() {
-		return idDoDono;
+		return idDono;
 	}
 	
-	public void setIdDoDono(Long idDoDono) {
-		this.idDoDono = idDoDono;
+	public void setIdDoDono(Long idDono) {
+		this.idDono = idDono;
 	}
 	
 	public LinkedList<Long> getListaModeradores() {
