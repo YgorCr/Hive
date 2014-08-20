@@ -2,7 +2,7 @@ package gui;
 
 import java.util.HashMap;
 
-import javax.faces.bean.ManagedBean;
+//import javax.faces.bean.ManagedBean;
 
 import util.EmailException;
 import util.IdadeException;
@@ -13,7 +13,7 @@ import business.model.UsuarioAB;
 import business.controllers.UsuarioControllerIF;
 import business.controllers.UsuarioController;
 
-@ManagedBean(name = "usuario")
+//@ManagedBean(name = "usuario")
 public class UsuarioBean {
 	private UsuarioAB user = new UsuarioAB() {};
 	private UsuarioControllerIF controller = new UsuarioController();

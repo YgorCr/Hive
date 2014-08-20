@@ -4,9 +4,9 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
+//import javax.faces.bean.ManagedBean;
+//import javax.faces.bean.ViewScoped;
+//import javax.faces.context.FacesContext;
 
 import util.DataDeValidadeException;
 import util.PrecoException;
@@ -15,8 +15,8 @@ import business.controllers.IngressoControllerIF;
 import business.model.EventoAB;
 import business.model.IngressoAB;
 import business.model.UsuarioAB;
-@ViewScoped
-@ManagedBean(name = "ingresso")
+//@ViewScoped
+//@ManagedBean(name = "ingresso")
 public class IngressoBean {
 	private IngressoAB ingresso = new IngressoAB() {
 	};

@@ -119,8 +119,8 @@ public class UsuarioController implements UsuarioControllerIF{
         return objMap;
 	}
     
-    public List<HashMap<String, Object>> listToHashMap(List<UsuarioAB> list){
-    	List<HashMap<String, Object>> res = new ArrayList<HashMap<String,Object>>(list.size());
+    public List<HashMap<String, Object>> listToHashMap(UsuarioAB[] list){
+    	List<HashMap<String, Object>> res = new ArrayList<HashMap<String,Object>>(list.length);
     	
     	for (UsuarioAB user : list) {
 			res.add(this.toHashMap(user));

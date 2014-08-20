@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Facade
  */
 
 package business.controllers;
@@ -20,7 +18,7 @@ import util.SenhaException;
 
 /**
  *
- * @author ygor
+ * @author igor
  */
 public class BusinessFacades {
     private static BusinessFacades business;
@@ -32,6 +30,7 @@ public class BusinessFacades {
     	ingressoC = new IngressoController();
     }
    
+    //Singleton
     public static BusinessFacades getInstance(){
         if(business == null){
             business = new BusinessFacades();

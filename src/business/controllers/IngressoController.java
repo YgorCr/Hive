@@ -1,7 +1,6 @@
 package business.controllers;
 
 import infra.DaoAbstractFactory;
-import infra.DaoIngresso;
 
 import java.util.Arrays;
 import java.util.Calendar;

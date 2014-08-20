@@ -3,7 +3,7 @@ package gui;
 import java.util.Calendar;
 import java.util.HashMap;
 
-import javax.faces.bean.ManagedBean;
+//import javax.faces.bean.ManagedBean;
 
 import business.controllers.IngressoController;
 import business.controllers.IngressoControllerIF;
@@ -17,7 +17,7 @@ import util.NomeException;
 import util.PrecoException;
 import util.SenhaException;
 
-@ManagedBean
+//@ManagedBean
 public class Init {
 	private static UsuarioControllerIF userController = new UsuarioController();
 	private static Boolean rodou = false;

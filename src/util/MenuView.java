@@ -1,10 +1,10 @@
 package util;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.context.FacesContext;
+//import javax.faces.application.FacesMessage;
+//import javax.faces.bean.ManagedBean;
+//import javax.faces.context.FacesContext;
 
-@ManagedBean
+//@ManagedBean
 public class MenuView {
      
     public void save() {
@@ -20,7 +20,7 @@ public class MenuView {
     }
      
     public void addMessage(String summary, String detail) {
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
-        FacesContext.getCurrentInstance().addMessage(null, message);
+        //FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
+        //FacesContext.getCurrentInstance().addMessage(null, message);
     }
 }
