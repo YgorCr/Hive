@@ -1,5 +1,6 @@
 /*
- * Facade
+ * Padrão: Facade
+ * Pardão: Singleton
  */
 
 package business.controllers;

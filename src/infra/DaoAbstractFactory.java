@@ -1,3 +1,7 @@
+/*
+ * Padrão: AbstractFactory
+ */
+
 package infra;
 
 public class DaoAbstractFactory {

@@ -1,3 +1,8 @@
+/*
+ * Padrão: Singleton
+ * Factory
+ */
+
 package infra;
 
 import java.util.HashMap;

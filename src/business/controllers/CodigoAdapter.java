@@ -1,3 +1,7 @@
+/*
+ *Padrão: Adapter 
+ */
+
 package business.controllers;
 
 public class CodigoAdapter implements CodigoIF{

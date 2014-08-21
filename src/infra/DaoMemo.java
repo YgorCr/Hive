@@ -1,3 +1,7 @@
+/*
+ * Padrão: Template Method - getDB(), pesquisa genérica usando hash <atributo,value>
+ */
+
 package infra;
 
 import java.lang.reflect.Field;

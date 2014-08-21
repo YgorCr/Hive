@@ -64,11 +64,11 @@ public abstract class EventoAB implements EventoIF{
 		this.endereco = endereco;
 	}
 	
-	public Long getIdDoDono() {
+	public Long getIdDono() {
 		return idDono;
 	}
 	
-	public void setIdDoDono(Long idDono) {
+	public void setIdDono(Long idDono) {
 		this.idDono = idDono;
 	}
 	
