@@ -2,6 +2,7 @@ package business.controllers;
 
 import infra.DaoAbstractFactory;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -11,37 +12,54 @@ import java.util.List;
 
 import util.DataDeValidadeException;
 import util.NomeException;
+import util.StructureException;
 import business.model.EventoAB;
 
 public class EventoController implements EventoControllerIF {
 
 	@Override
 	public Long create(HashMap<String, Object> objeto) throws NomeException,
-			DataDeValidadeException {
+			DataDeValidadeException, StructureException {
 		validaNome((String) objeto.get("nome"));
 		validaDataDeValidade(objeto.get("dataInicio"));
 		validaDataDeValidade(objeto.get("dataFim"));
 
-		EventoAB newEvent = (EventoAB) DaoAbstractFactory.getInstance(
-				EventoAB.class).create(objeto);
+		EventoAB newEvent;
+		try {
+			newEvent = (EventoAB) DaoAbstractFactory.getInstance(
+					EventoAB.class).create(objeto);
+		} catch (IOException e) {
+			throw new StructureException(
+					"Erro de estrutura de arquivos ao criar evento");// TODO Auto-generated catch block
+		}
 
 		return newEvent.getId();
 	}
 
 	@Override
 	public void update(Long id, HashMap<String, Object> objeto)
-			throws NomeException, DataDeValidadeException {
+			throws NomeException, DataDeValidadeException, StructureException {
 		validaNome((String) objeto.get("nome"));
 		validaDataDeValidade(objeto.get("dataInicio"));
 		validaDataDeValidade(objeto.get("dataFim"));
 
-		DaoAbstractFactory.getInstance(EventoAB.class).update(id, objeto);
+		try {
+			DaoAbstractFactory.getInstance(EventoAB.class).update(id, objeto);
+		} catch (ClassNotFoundException | IOException e) {
+			throw new StructureException(
+					"Erro de estrutura de arquivos ao atualizar evento");// TODO Auto-generated catch block
+		}
 	}
 
 	@Override
-	public EventoAB get(Long id) {
-		return (EventoAB) DaoAbstractFactory.getInstance(EventoAB.class)
-				.get(id);
+	public EventoAB get(Long id) throws StructureException {
+		try {
+			return (EventoAB) DaoAbstractFactory.getInstance(EventoAB.class)
+					.get(id);
+		} catch (ClassNotFoundException | IOException e) {
+			throw new StructureException(
+					"Erro de estrutura de arquivos ao recuperar evento");// TODO Auto-generated catch block
+		}
 	}
 
 	@Override
@@ -50,15 +68,27 @@ public class EventoController implements EventoControllerIF {
 	}
 
 	@Override
-	public EventoAB[] listAll(Long offset, Long max) {
-		List<?> all = DaoAbstractFactory.getInstance(EventoAB.class).listAll(
-				max, offset);
+	public EventoAB[] listAll(Long offset, Long max) throws StructureException {
+		List<?> all;
+		try {
+			all = DaoAbstractFactory.getInstance(EventoAB.class).listAll(
+					max, offset);
+		} catch (ClassNotFoundException | IOException e) {
+			throw new StructureException(
+					"Erro de estrutura de arquivos ao listar eventos");// TODO Auto-generated catch block
+		}
 		return (EventoAB[]) all.toArray(new EventoAB[all.size()]);
 	}
 
 	@Override
-	public EventoAB[] listAll() {
-		List<?> all = DaoAbstractFactory.getInstance(EventoAB.class).listAll();
+	public EventoAB[] listAll() throws StructureException {
+		List<?> all;
+		try {
+			all = DaoAbstractFactory.getInstance(EventoAB.class).listAll();
+		} catch (ClassNotFoundException | IOException e) {
+			throw new StructureException(
+					"Erro de estrutura de arquivos ao criar evento");// TODO Auto-generated catch block
+		}
 		return (EventoAB[]) all.toArray(new EventoAB[all.size()]);
 	}
 

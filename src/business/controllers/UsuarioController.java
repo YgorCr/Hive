@@ -6,6 +6,7 @@
 
 package business.controllers;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import util.IdadeException;
 import util.LoginException;
 import util.NomeException;
 import util.SenhaException;
+import util.StructureException;
 import business.model.UsuarioAB;
 
 /**
@@ -32,23 +34,39 @@ public class UsuarioController implements UsuarioControllerIF{
         validaEmail((String) objeto.get("email"));
         validaIdade((int) objeto.get("idade"));
         
-        UsuarioAB newUser = (UsuarioAB) DaoAbstractFactory.getInstance(UsuarioAB.class).create(objeto);
+        UsuarioAB newUser = null;
+		try {
+			newUser = (UsuarioAB) DaoAbstractFactory.getInstance(UsuarioAB.class).create(objeto);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         
 		return newUser.getId();
 	}
 
 	@Override
-	public void update(Long id, HashMap<String, Object> objeto) throws EmailException, IdadeException, LoginException, NomeException, SenhaException{
+	public void update(Long id, HashMap<String, Object> objeto) throws EmailException, IdadeException, LoginException, NomeException, SenhaException, StructureException{
 		validaNome((String) objeto.get("nome"));
         validaEmail((String) objeto.get("email"));
         validaIdade((int) objeto.get("idade"));
 		
-		DaoAbstractFactory.getInstance(UsuarioAB.class).update(id, objeto);
+		try {
+			DaoAbstractFactory.getInstance(UsuarioAB.class).update(id, objeto);
+		} catch (ClassNotFoundException | IOException e) {
+			throw new StructureException(
+					"Erro de estrutura de arquivos ao atualizar usuario");// TODO Auto-generated catch block
+		}
 	}
 	
 	@Override
-	public UsuarioAB get(Long id){
-    	return (UsuarioAB) DaoAbstractFactory.getInstance(UsuarioAB.class).get(id);
+	public UsuarioAB get(Long id) throws StructureException{
+    	try {
+			return (UsuarioAB) DaoAbstractFactory.getInstance(UsuarioAB.class).get(id);
+		} catch (ClassNotFoundException | IOException e) {
+			throw new StructureException(
+					"Erro de estrutura de arquivos ao recuperar usuarios");// TODO Auto-generated catch block
+		}
 	}
 	
 	@Override
@@ -57,14 +75,26 @@ public class UsuarioController implements UsuarioControllerIF{
 	}
 
 	@Override
-	public UsuarioAB[] listAll(Long offset, Long max) {
-		List<?> all = DaoAbstractFactory.getInstance(UsuarioAB.class).listAll(max, offset);
+	public UsuarioAB[] listAll(Long offset, Long max) throws StructureException {
+		List<?> all = null;
+		try {
+			all = DaoAbstractFactory.getInstance(UsuarioAB.class).listAll(max, offset);
+		} catch (ClassNotFoundException | IOException e) {
+			throw new StructureException(
+					"Erro de estrutura de arquivos ao listar usuarios");// TODO Auto-generated catch block
+		}
     	return (UsuarioAB[]) all.toArray(new UsuarioAB[all.size()]);
 	}
 
 	@Override
-	public UsuarioAB[] listAll() {
-		List<?> all = DaoAbstractFactory.getInstance(UsuarioAB.class).listAll();
+	public UsuarioAB[] listAll() throws StructureException {
+		List<?> all = null;
+		try {
+			all = DaoAbstractFactory.getInstance(UsuarioAB.class).listAll();
+		} catch (ClassNotFoundException | IOException e) {
+			throw new StructureException(
+					"Erro de estrutura de arquivos ao listar usuarios");// TODO Auto-generated catch block
+		}
     	return (UsuarioAB[]) all.toArray(new UsuarioAB[all.size()]);
 	}
 	

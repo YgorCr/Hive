@@ -2,6 +2,7 @@ package business.controllers;
 
 import infra.DaoAbstractFactory;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -12,16 +13,23 @@ import java.util.List;
 
 import util.DataDeValidadeException;
 import util.PrecoException;
+import util.StructureException;
 import business.model.IngressoAB;
 
 public class IngressoController implements IngressoControllerIF {
 
 	public Long create(HashMap<String, Object> objeto) throws PrecoException,
-			DataDeValidadeException {
+			DataDeValidadeException, StructureException {
 		validaValor(objeto.get("valor"));
 		validaDataDeValidade(objeto.get("dataDeValidade"));
-		IngressoAB i = (IngressoAB) DaoAbstractFactory.getInstance(
-				IngressoAB.class).create(objeto);
+		IngressoAB i;
+		try {
+			i = (IngressoAB) DaoAbstractFactory.getInstance(
+					IngressoAB.class).create(objeto);
+		} catch (IOException e) {
+			throw new StructureException(
+					"Erro de estrutura de arquivos ao criar ingresso");// TODO Auto-generated catch block
+		}
 		return i.getId();
 	}
 
@@ -30,18 +38,28 @@ public class IngressoController implements IngressoControllerIF {
 		validaValor(objeto.get("valor"));
 		validaDataDeValidade(objeto.get("dataDeValidade"));
 
-		DaoAbstractFactory.getInstance(IngressoAB.class).update(id, objeto);
+		try {
+			DaoAbstractFactory.getInstance(IngressoAB.class).update(id, objeto);
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void delete(Long id) {
 		DaoAbstractFactory.getInstance(IngressoAB.class).delete(id);
 	}
 
-	public IngressoAB get(Long id) {
+	public IngressoAB get(Long id) throws StructureException {
 		HashMap<String, Object> query = new HashMap<String, Object>();
 		query.put("id", id);
-		return (IngressoAB) DaoAbstractFactory.getInstance(IngressoAB.class)
-				.findOneBy(query);
+		try {
+			return (IngressoAB) DaoAbstractFactory.getInstance(IngressoAB.class)
+					.findOneBy(query);
+		} catch (ClassNotFoundException | IOException e) {
+			throw new StructureException(
+					"Erro de estrutura de arquivos ao recuperar ingresso");// TODO Auto-generated catch block
+		}
 	}
 
 	public String geraQRCode(String codigo) {
@@ -70,16 +88,27 @@ public class IngressoController implements IngressoControllerIF {
 	}
 
 	@Override
-	public IngressoAB[] listAll(Long offset, Long max) {
-		return (IngressoAB[]) DaoAbstractFactory.getInstance(IngressoAB.class)
-				.listAll(offset, max).toArray();
+	public IngressoAB[] listAll(Long offset, Long max) throws StructureException {
+		try {
+			return (IngressoAB[]) DaoAbstractFactory.getInstance(IngressoAB.class)
+					.listAll(offset, max).toArray();
+		} catch (ClassNotFoundException | IOException e) {
+			throw new StructureException(
+					"Erro de estrutura de arquivos ao listar ingressos");// TODO Auto-generated catch block
+		}
 	}
 
 	@Override
 	public IngressoAB[] listAll() {
 		// System.out.println("a\n"+"a\n"+"a\n"+"a\n"+"a\n"+"a\n"+"a\n"+"a\n"+"a\n");
-		Object ar[] = DaoAbstractFactory.getInstance(IngressoAB.class)
-				.listAll().toArray();
+		Object ar[] = null;
+		try {
+			ar = DaoAbstractFactory.getInstance(IngressoAB.class)
+					.listAll().toArray();
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		// System.out.println(Arrays.copyOf(ar, ar.length, IngressoAB[].class)
 		// == null);
 		return Arrays.copyOf(ar, ar.length, IngressoAB[].class);
