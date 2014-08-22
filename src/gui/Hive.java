@@ -7,7 +7,9 @@
 package gui;
 
 import business.controllers.BusinessFacades;
+import business.controllers.Memento;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -69,7 +71,7 @@ public class Hive {
     
     public static void insertSamples() throws EmailException, IdadeException, LoginException, NomeException, SenhaException, StructureException, PrecoException, DataDeValidadeException {
     	BusinessFacades b = BusinessFacades.getInstance();
-        
+    	
     	//Cria usuario
         b.usuarioCreate("YgorCr", "Ygor@hotmail.com", 25, "123.456.789-11"); // id = 0
         b.usuarioCreate("YgorDiniz", "Ygor2@hotmail.com", 26, "123.456.789-12");// id = 1
@@ -80,9 +82,12 @@ public class Hive {
         b.usuarioCreate("YgorCrE", "YgorE@hotmail.com", 25, "123.456.789-17");// id = 6
         b.usuarioCreate("YgorDinizF", "Ygor2F@hotmail.com", 26, "123.456.789-18");// id = 7
    
-
-            
-            //Evento
+        b.set(b.usuarioUpdate(1L, "Mudoooou", "Mudou@hotmail.com", 100, "123.456.789-16"));
+        b.saveUserMemento();
+        b.set(b.usuarioUpdate(1L, "Mudoudenovo", "Mudou22@hotmail.com", 2, "222.222.789-16"));
+        b.undoUserMemento();
+        
+        //Evento
         Calendar init = Calendar.getInstance();
         Calendar fim = Calendar.getInstance();
         

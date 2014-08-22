@@ -22,6 +22,7 @@ public class CommandUsuarioUpdate implements Command{
         objeto.put("idade", idade);
         objeto.put("cpf", cpf);
         this.id = id;
+        objeto.put("id", this.id);
 	}
 
 	@Override
@@ -32,4 +33,11 @@ public class CommandUsuarioUpdate implements Command{
         userC.update(id, objeto);
 	}
 
+	public HashMap<String, Object> getObjeto(){
+		return this.objeto;
+	}
+	
+	public Long getId(){
+		return this.id;
+	}
 }

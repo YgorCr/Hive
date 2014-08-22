@@ -5,9 +5,12 @@
 
 package business.controllers;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+
+import com.sun.org.apache.bcel.internal.generic.NEW;
 
 import util.DataDeValidadeException;
 import util.EmailException;
@@ -24,6 +27,10 @@ import util.StructureException;
  */
 public class BusinessFacades {
     private static BusinessFacades business;
+
+    private List<Memento> savedStates = new ArrayList<Memento>();
+    private HashMap<String, Object> state;
+
         
     private BusinessFacades() {
     }
@@ -39,10 +46,9 @@ public class BusinessFacades {
     /*
      * Métodos de usuario - CRUD
      */
-    public CommandUsuarioCreate usuarioCreate(String nome, String email, int idade, String cpf) throws EmailException, IdadeException, LoginException, NomeException, SenhaException, StructureException{
+    public void usuarioCreate(String nome, String email, int idade, String cpf) throws EmailException, IdadeException, LoginException, NomeException, SenhaException, StructureException{
        CommandUsuarioCreate commandUC = new CommandUsuarioCreate(nome, email, idade, cpf);
        commandUC.execute();
-       return commandUC;
     }
     
     public HashMap<String, Object> usuarioGet(Long id) throws StructureException{
@@ -55,9 +61,10 @@ public class BusinessFacades {
     	return userC.listToHashMap(userC.listAll());
     }
     
-    public void usuarioUpdate(Long id, String nome, String email, int idade, String cpf) throws EmailException, IdadeException, LoginException, NomeException, SenhaException, PrecoException, DataDeValidadeException, StructureException{
+    public HashMap<String, Object> usuarioUpdate(Long id, String nome, String email, int idade, String cpf) throws EmailException, IdadeException, LoginException, NomeException, SenhaException, PrecoException, DataDeValidadeException, StructureException{
     	CommandUsuarioUpdate commandUP = new CommandUsuarioUpdate(id, nome, email, idade, cpf);
     	commandUP.execute();
+    	return commandUP.getObjeto();
     }
     
     public void usuarioDelete(Long id) throws StructureException{
@@ -129,17 +136,36 @@ public class BusinessFacades {
     	EventoController eventoC = new EventoController();
     	eventoC.delete(id);
     }
-    
 
-	//public void saveUser(CommandUsuarioCreate commandUC){
-    //    CareTaker care = new CareTaker();
-    //    care.save(commandUC);
-    //}
-     
-    //public void undoUser(CommandUsuarioCreate commandUC){
-    //	CareTaker care = new CareTaker();
-    //    care.undo(commandUC);
-    //}
+    
+    //Memento
+    public void set(HashMap<String, Object> state) {
+        System.out.println("Setando o estado " + state);
+        this.state = state;
+    }
+ 
+    private Memento saveToMemento() {
+        System.out.println("Salvando no Memento");
+        return new Memento(state);
+    }
+ 
+    private void undoMemento(Memento memento) {
+        state = memento.getSavedState();
+        System.out.println("Estado após Undo " + state);
+    }
+    
+    public void saveUserMemento(){
+    	savedStates.add(saveToMemento());
+    }
+    
+    public void undoUserMemento() throws EmailException, IdadeException, LoginException, NomeException, SenhaException, PrecoException, DataDeValidadeException, StructureException{
+    	int atual = savedStates.size()-1;
+        undoMemento(savedStates.get(atual));
+    
+        UsuarioController uc = new UsuarioController();
+        uc.update((Long)state.get("id"), state);
+    }
+    
 }
 
 

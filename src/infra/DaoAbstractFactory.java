@@ -8,7 +8,7 @@ public class DaoAbstractFactory {
 	public static DaoIF<?> getInstance(Class<?> classe){
 		String classeName = classe.getName().split("\\.")[classe.getName().split("\\.").length-1];
 		
-		Boolean persistente = true; // Altere aqui para mudar o tipo de persistencia
+		Boolean persistente = false; // Altere aqui para mudar o tipo de persistencia
 		
 		if (persistente) {
 			switch(classeName){
