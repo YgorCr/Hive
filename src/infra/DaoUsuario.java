@@ -44,11 +44,11 @@ public class DaoUsuario extends DaoFile<UsuarioAB> {
 	@Override
 	public UsuarioAB create(HashMap<String, Object> obj) throws IOException, ClassNotFoundException{
 		Usuario newObj = new Usuario();
-		obj.put("id", genId++);		
+		obj.put("id", genId++);
 		this.setCampos(obj, newObj);		
-		this.getDB().put(newObj.getId(), newObj);
+		this.DB.put(newObj.getId(), newObj);
 
-		fileOut = new FileOutputStream("user.dat", true); 
+		fileOut = new FileOutputStream("user.dat", false); 
 		writer = new ObjectOutputStream(fileOut);
 		writer.writeObject(this.DB);
 		fileOut.close();
@@ -71,5 +71,13 @@ public class DaoUsuario extends DaoFile<UsuarioAB> {
 		} 
 		
 		return DB;
+	}
+	
+	protected void saveDataState() throws IOException {
+		FileOutputStream fileOut = new FileOutputStream("user.dat", false); // overwrite
+		ObjectOutputStream writer = new ObjectOutputStream(fileOut);
+		writer.writeObject(DB);
+		fileOut.close();
+	
 	}
 }
