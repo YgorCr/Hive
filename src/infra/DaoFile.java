@@ -1,5 +1,6 @@
 package infra;
 
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -16,8 +17,14 @@ public abstract class DaoFile<T> implements DaoIF<T>
 	protected abstract HashMap<Long, T> getDB() throws IOException, ClassNotFoundException;
 
 	@Override
-	public void delete(Long id) {
+	public void delete(Long id) throws IOException, ClassNotFoundException {
+		HashMap<Long, UsuarioAB> updateBD = (HashMap<Long, UsuarioAB>) this.getDB();
+		updateBD.remove(id);
 		
+		FileOutputStream fileOut = new FileOutputStream("c:\\user.dat", false); // overwrite
+		ObjectOutputStream writer = new ObjectOutputStream(fileOut);
+		writer.writeObject(updateBD);
+		fileOut.close();
 		
 	}
 

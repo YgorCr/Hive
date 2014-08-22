@@ -46,8 +46,13 @@ public class IngressoController implements IngressoControllerIF {
 		}
 	}
 
-	public void delete(Long id) {
-		DaoAbstractFactory.getInstance(IngressoAB.class).delete(id);
+	public void delete(Long id) throws StructureException {
+		try {
+			DaoAbstractFactory.getInstance(IngressoAB.class).delete(id);
+		} catch (ClassNotFoundException | IOException e) {
+			throw new StructureException(
+					"Erro de estrutura de arquivos ao deletar Ingresso");// TODO Auto-generated catch block
+		}
 	}
 
 	public IngressoAB get(Long id) throws StructureException {

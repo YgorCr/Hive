@@ -70,8 +70,13 @@ public class UsuarioController implements UsuarioControllerIF{
 	}
 	
 	@Override
-	public void delete(Long id) {
-		DaoAbstractFactory.getInstance(UsuarioAB.class).delete(id);
+	public void delete(Long id) throws StructureException {
+		try {
+			DaoAbstractFactory.getInstance(UsuarioAB.class).delete(id);
+		} catch (ClassNotFoundException | IOException e) {
+			throw new StructureException(
+					"Erro de estrutura de arquivos ao deletar usuario");// TODO Auto-generated catch block
+		}
 	}
 
 	@Override

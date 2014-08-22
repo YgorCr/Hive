@@ -6,6 +6,7 @@
 
 package infra;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -19,7 +20,7 @@ public interface DaoIF<T> {
 	
     public abstract T create(HashMap<String, Object> obj) throws IOException;
     
-    public abstract void delete(Long id);
+    public abstract void delete(Long id) throws FileNotFoundException, IOException, ClassNotFoundException;
     
     public abstract void update(Long id, HashMap<String, Object> modifiedObj) throws ClassNotFoundException, IOException;
     

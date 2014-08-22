@@ -11,7 +11,7 @@ public interface IngressoControllerIF {
 	public Long create (HashMap<String, Object> objeto) throws PrecoException, DataDeValidadeException, StructureException;
 	public void update(Long id, HashMap<String, Object> objeto) throws PrecoException, DataDeValidadeException;
 	public IngressoAB get(Long id) throws StructureException;
-	public void delete(Long id);
+	public void delete(Long id) throws StructureException;
 	public IngressoAB[] listAll(Long offset, Long max) throws StructureException;
 	public IngressoAB[] listAll();
 }
