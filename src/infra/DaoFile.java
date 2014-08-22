@@ -9,21 +9,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.primefaces.component.api.SavedState;
+
 import business.model.UsuarioAB;
 
 public abstract class DaoFile<T> implements DaoIF<T> 
 {
 	protected abstract HashMap<Long, T> getDB() throws IOException, ClassNotFoundException;
+	protected abstract void saveDataState() throws IOException, ClassNotFoundException;
 
 	@Override
 	public void delete(Long id) throws IOException, ClassNotFoundException {
-		HashMap<Long, UsuarioAB> updateBD = (HashMap<Long, UsuarioAB>) this.getDB();
-		updateBD.remove(id);
-		
-		FileOutputStream fileOut = new FileOutputStream("user.dat", false); // overwrite
-		ObjectOutputStream writer = new ObjectOutputStream(fileOut);
-		writer.writeObject(updateBD);
-		fileOut.close();
+		//HashMap<Long, UsuarioAB> updateBD = (HashMap<Long, UsuarioAB>) this.getDB();
+		this.getDB().remove(id);	
+		saveDataState();
 		
 	}
 

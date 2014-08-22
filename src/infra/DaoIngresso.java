@@ -72,9 +72,18 @@ try{
         reader = new ObjectInputStream(fileIn);
         DB = (HashMap<Long, IngressoAB>) reader.readObject();
 	} catch (FileNotFoundException e) {
-		System.out.println("Arquivo user.dat ainda nao existe.");
+		System.out.println("Arquivo ingresso.dat ainda nao existe.");
 	} 
 		return DB;
+	}
+
+	@Override
+	protected void saveDataState() throws IOException, ClassNotFoundException {
+		FileOutputStream fileOut = new FileOutputStream("user.dat", false); // overwrite
+		ObjectOutputStream writer = new ObjectOutputStream(fileOut);
+		writer.writeObject(DB);
+		fileOut.close();
+		
 	}
 	
 }
