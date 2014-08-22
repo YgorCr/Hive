@@ -29,6 +29,7 @@ public class EventoController implements EventoControllerIF {
 			newEvent = (EventoAB) DaoAbstractFactory.getInstance(
 					EventoAB.class).create(objeto);
 		} catch (IOException | ClassNotFoundException e) {
+			System.out.println("EventoController: "+e);
 			throw new StructureException(
 					"Erro de estrutura de arquivos ao criar evento");// TODO Auto-generated catch block
 		}

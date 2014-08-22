@@ -25,12 +25,12 @@ public class CommandUsuarioCreate implements Command{
 		userC.create(objeto);
 	}
 
-	public Memento save(){
-        return new Memento(this.objeto);
-    }
+	//public Memento save(){
+    //    return new Memento(this.objeto);
+    //}
      
-    public void undoToLastSave(Object obj){
-        Memento memento = (Memento) obj;
-        this.objeto= memento.getSavedState();
-    }
+    //public void undoToLastSave(Object obj){
+    //    Memento memento = (Memento) obj;
+    //    this.objeto= memento.getSavedState();
+    //}
 }

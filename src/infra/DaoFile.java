@@ -20,7 +20,7 @@ public abstract class DaoFile<T> implements DaoIF<T>
 		HashMap<Long, UsuarioAB> updateBD = (HashMap<Long, UsuarioAB>) this.getDB();
 		updateBD.remove(id);
 		
-		FileOutputStream fileOut = new FileOutputStream("c:\\user.dat", false); // overwrite
+		FileOutputStream fileOut = new FileOutputStream("user.dat", false); // overwrite
 		ObjectOutputStream writer = new ObjectOutputStream(fileOut);
 		writer.writeObject(updateBD);
 		fileOut.close();
@@ -32,7 +32,7 @@ public abstract class DaoFile<T> implements DaoIF<T>
 		HashMap<Long, UsuarioAB> updateBD = (HashMap<Long, UsuarioAB>) this.getDB();
 		setCampos(modifiedObj, updateBD.get(id));
 		
-		FileOutputStream fileOut = new FileOutputStream("c:\\user.dat", false); // overwrite
+		FileOutputStream fileOut = new FileOutputStream("user.dat", false); // overwrite
 		ObjectOutputStream writer = new ObjectOutputStream(fileOut);
 		writer.writeObject(updateBD);
 		fileOut.close();

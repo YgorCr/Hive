@@ -36,34 +36,30 @@ public class DaoEvento extends DaoFile<EventoAB>{
 	
 	@Override
 	public EventoAB create(HashMap<String, Object> obj) throws IOException, ClassNotFoundException {
-		EventoAB evento = null;
-		
-		evento = new Evento();
-		
+		EventoAB evento = new Evento();
 		obj.put("id", genID++);
-		
-		this.setCampos(obj, evento);
-		
+		this.setCampos(obj, evento);		
 		this.getDB().put(evento.getId(), evento);
 		
-		fileOut = new FileOutputStream("c:\\event.dat", false); 
+		fileOut = new FileOutputStream("evento.dat", false); 
 		writer = new ObjectOutputStream(fileOut);
-		writer.writeObject(DB);
+		writer.writeObject(this.DB);
 		fileOut.close();
-		
-	
-		
+		writer.close();
+
 		return evento;
 	}
 
 	@Override
 	protected HashMap<Long, EventoAB> getDB() throws IOException, ClassNotFoundException {
 		fileIn = null;
-
-        fileIn = new FileInputStream("C:\\event.dat");
-        reader = new ObjectInputStream(fileIn);
-        DB = (HashMap<Long, EventoAB>) reader.readObject();		        	       
-
+		try{
+	        fileIn = new FileInputStream("evento.dat");
+	        reader = new ObjectInputStream(fileIn);
+	        DB = (HashMap<Long, EventoAB>) reader.readObject();		        	       
+		} catch (FileNotFoundException e) {
+			System.out.println("Arquivo user.dat ainda nao existe.");
+		} 
 		
 		return DB;
 	}

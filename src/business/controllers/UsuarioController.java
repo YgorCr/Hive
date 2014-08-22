@@ -38,6 +38,7 @@ public class UsuarioController implements UsuarioControllerIF{
 		try {
 			newUser = (UsuarioAB) DaoAbstractFactory.getInstance(UsuarioAB.class).create(objeto);
 		} catch (IOException | ClassNotFoundException e) {
+			System.out.println("UserCtrl: "+ e);
 			throw new StructureException(
 					"Erro de estrutura de arquivos ao criar usuario");// TODO Auto-generated catch block
 		}

@@ -131,15 +131,15 @@ public class BusinessFacades {
     }
     
 
-	public void saveUser(CommandUsuarioCreate commandUC){
-        CareTaker care = new CareTaker();
-        care.save(commandUC);
-    }
+	//public void saveUser(CommandUsuarioCreate commandUC){
+    //    CareTaker care = new CareTaker();
+    //    care.save(commandUC);
+    //}
      
-    public void undoUser(CommandUsuarioCreate commandUC){
-    	CareTaker care = new CareTaker();
-        care.undo(commandUC);
-    }
+    //public void undoUser(CommandUsuarioCreate commandUC){
+    //	CareTaker care = new CareTaker();
+    //    care.undo(commandUC);
+    //}
 }
 
 

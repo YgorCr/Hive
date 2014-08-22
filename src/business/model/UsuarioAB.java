@@ -6,11 +6,13 @@
 
 package business.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author ygor
  */
-public abstract class UsuarioAB implements UsuarioIF{
+public abstract class UsuarioAB implements UsuarioIF, Serializable {
     private Long id;
     private String nome;
     private String email;

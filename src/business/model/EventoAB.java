@@ -1,9 +1,10 @@
 package business.model;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.LinkedList;
 
-public abstract class EventoAB implements EventoIF{
+public abstract class EventoAB implements EventoIF, Serializable{
 	private Long id;
 	private String nome;
 	private String descricao;

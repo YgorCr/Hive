@@ -42,18 +42,17 @@ public class DaoUsuario extends DaoFile<UsuarioAB> {
 	}
 	
 	@Override
-	public UsuarioAB create(HashMap<String, Object> obj) throws IOException{
+	public UsuarioAB create(HashMap<String, Object> obj) throws IOException, ClassNotFoundException{
 		Usuario newObj = new Usuario();
-		obj.put("id", genId++);
-		
-		this.setCampos(obj, newObj);
-		
-		this.DB.put(newObj.getId(), newObj);
+		obj.put("id", genId++);		
+		this.setCampos(obj, newObj);		
+		this.getDB().put(newObj.getId(), newObj);
 
-		fileOut = new FileOutputStream("c:\\user.dat", false); 
+		fileOut = new FileOutputStream("user.dat", true); 
 		writer = new ObjectOutputStream(fileOut);
 		writer.writeObject(this.DB);
 		fileOut.close();
+		writer.close();
 		
 		return newObj;
 	}
@@ -62,11 +61,14 @@ public class DaoUsuario extends DaoFile<UsuarioAB> {
 	@Override
 	protected HashMap<Long, UsuarioAB> getDB() throws IOException, ClassNotFoundException {
 		fileIn = null;
-
-        fileIn = new FileInputStream("C:\\user.dat");
-        reader = new ObjectInputStream(fileIn);
-        DB = (HashMap<Long, UsuarioAB>) reader.readObject();		        	       
-
+ 
+		try {
+	        fileIn = new FileInputStream("user.dat");
+	        reader = new ObjectInputStream(fileIn);
+	        DB = (HashMap<Long, UsuarioAB>) reader.readObject();		        	       
+		} catch (FileNotFoundException e) {
+			System.out.println("Arquivo user.dat ainda nao existe.");
+		} 
 		
 		return DB;
 	}

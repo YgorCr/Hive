@@ -1,8 +1,9 @@
 package business.model;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
-public abstract class IngressoAB implements IngressoIF{
+public abstract class IngressoAB implements IngressoIF, Serializable{
 	private Long id; //precisa disso?
 	private Long idEvento;
 	private Long idUsuario;

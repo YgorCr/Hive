@@ -56,7 +56,7 @@ public class DaoIngresso extends DaoFile<IngressoAB>{
 		this.setCampos(obj, ingresso);
 		this.getDB().put(ingresso.getId(), ingresso);
 		
-		fileOut = new FileOutputStream("c:\\ingresso.dat", false); 
+		fileOut = new FileOutputStream("ingresso.dat", false); 
 		writer = new ObjectOutputStream(fileOut);
 		writer.writeObject(DB);
 		fileOut.close();
@@ -67,11 +67,13 @@ public class DaoIngresso extends DaoFile<IngressoAB>{
 	@Override
 	protected HashMap<Long, IngressoAB> getDB() throws IOException, ClassNotFoundException {
 		fileIn = null;
-
-        fileIn = new FileInputStream("C:\\user.dat");
+try{
+        fileIn = new FileInputStream("ingresso.dat");
         reader = new ObjectInputStream(fileIn);
         DB = (HashMap<Long, IngressoAB>) reader.readObject();
-		
+	} catch (FileNotFoundException e) {
+		System.out.println("Arquivo user.dat ainda nao existe.");
+	} 
 		return DB;
 	}
 	
