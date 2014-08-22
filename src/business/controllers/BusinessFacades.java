@@ -39,15 +39,8 @@ public class BusinessFacades {
      * Métodos de usuario - CRUD
      */
     public void usuarioCreate(String nome, String email, int idade, String cpf) throws EmailException, IdadeException, LoginException, NomeException, SenhaException{
-        UsuarioController userC = new UsuarioController();
-        
-        HashMap<String, Object> objeto = new HashMap<String, Object>();
-        objeto.put("nome", nome);
-        objeto.put("email", email);
-        objeto.put("idade", idade);
-        objeto.put("cpf", cpf);
-        
-        userC.create(objeto);
+       CommandUsuarioCreate commandUC = new CommandUsuarioCreate(nome, email, idade, cpf);
+       commandUC.execute();
     }
     
     public HashMap<String, Object> usuarioGet(Long id){
@@ -60,16 +53,9 @@ public class BusinessFacades {
     	return userC.listToHashMap(userC.listAll());
     }
     
-    public void usuarioUpdate(Long id, String nome, String email, int idade, String cpf) throws EmailException, IdadeException, LoginException, NomeException, SenhaException{
-    	UsuarioController userC = new UsuarioController();
-        
-        HashMap<String, Object> objeto = new HashMap<String, Object>();
-        objeto.put("nome", nome);
-        objeto.put("email", email);
-        objeto.put("idade", idade);
-        objeto.put("cpf", cpf);
-        
-        userC.update(id, objeto);
+    public void usuarioUpdate(Long id, String nome, String email, int idade, String cpf) throws EmailException, IdadeException, LoginException, NomeException, SenhaException, PrecoException, DataDeValidadeException{
+    	CommandUsuarioUpdate commandUP = new CommandUsuarioUpdate(id, nome, email, idade, cpf);
+    	commandUP.execute();
     }
     
     public void usuarioDelete(Long id){
@@ -87,17 +73,10 @@ public class BusinessFacades {
     	return ingressoC.geraQRCode(codigo);
     }
         
-    public String ingressoCreate(Long idEvento, Long idUsuario, Double valor, Calendar dataDeValidade, Boolean utilizado) throws PrecoException, DataDeValidadeException{
-    	IngressoController ingressoC = new IngressoController();
-        
-        HashMap<String, Object> objeto = new HashMap<String, Object>();
-        objeto.put("idEvento", idEvento);
-        objeto.put("idUsuario", idUsuario);
-        objeto.put("valor", valor);
-        objeto.put("dataDeValidade", dataDeValidade);
-        objeto.put("utilizado", utilizado);
-    	
-    	return Long.toString(ingressoC.create(objeto));
+    public String ingressoCreate(Long idEvento, Long idUsuario, Double valor, Calendar dataDeValidade, Boolean utilizado) throws PrecoException, DataDeValidadeException, EmailException, IdadeException, LoginException, NomeException, SenhaException{
+    	CommandIngressoCreate commandIC = new CommandIngressoCreate(idEvento, idUsuario, valor, dataDeValidade, utilizado);
+    	commandIC.execute();
+    	return Long.toString(commandIC.getIdCode());
     }
     
     public HashMap<String, Object> ingressoGet(Long id){
@@ -110,18 +89,9 @@ public class BusinessFacades {
     	return ingressoC.listToHashMap(ingressoC.listAll());
     }
 
-    public void ingressoUpdate(Long idIngresso, Long idEvento, Long idUsuario, Double valor, Calendar dataDeValidade, Boolean utilizado) throws PrecoException, DataDeValidadeException{
-
-    	IngressoController ingressoC = new IngressoController();
-        
-        HashMap<String, Object> objeto = new HashMap<String, Object>();
-        objeto.put("idEvento", idEvento);
-        objeto.put("idUsuario", idUsuario);
-        objeto.put("valor", valor);
-        objeto.put("dataDeValidade", dataDeValidade);
-        objeto.put("utilizado", utilizado);
-    	
-    	ingressoC.update(idIngresso, objeto);
+    public void ingressoUpdate(Long idIngresso, Long idEvento, Long idUsuario, Double valor, Calendar dataDeValidade, Boolean utilizado) throws PrecoException, DataDeValidadeException, EmailException, IdadeException, LoginException, NomeException, SenhaException{
+    	CommandIngressoUpdate commandIU = new CommandIngressoUpdate(idIngresso, idEvento, idUsuario, valor, dataDeValidade, utilizado);
+    	commandIU.execute();
     }
 
     public void IngressoDelete(Long id){
@@ -133,18 +103,9 @@ public class BusinessFacades {
      * Métodos de Evento - CRUD
      */
     
-    public String eventoCreate(Long idDono, String nome, String descricao, String endereco, Calendar dataInicio, Calendar dataFim) throws PrecoException, DataDeValidadeException, NomeException{
-    	EventoController eventoC = new EventoController();
-        
-        HashMap<String, Object> objeto = new HashMap<String, Object>();
-        objeto.put("idDono", idDono);
-        objeto.put("nome", nome);
-        objeto.put("descricao", descricao);
-        objeto.put("endereco", endereco);
-        objeto.put("dataInicio", dataInicio);
-        objeto.put("dataFim", dataFim);
-    	
-    	return Long.toString(eventoC.create(objeto));
+    public void eventoCreate(Long idDono, String nome, String descricao, String endereco, Calendar dataInicio, Calendar dataFim) throws PrecoException, DataDeValidadeException, NomeException, EmailException, IdadeException, LoginException, SenhaException{
+    	CommandEventoCreate commandEC = new CommandEventoCreate(idDono, nome, descricao, endereco, dataInicio, dataFim);
+    	commandEC.execute();
     }
     
     public HashMap<String, Object> eventoGet(Long id){
@@ -157,18 +118,9 @@ public class BusinessFacades {
     	return eventoC.listToHashMap(eventoC.listAll());
     }
     
-    public void eventoUpdate(Long idEvento,Long idDono, String nome, String descricao, String endereco, Calendar dataInicio, Calendar dataFim) throws PrecoException, DataDeValidadeException, NomeException{
-    	EventoController eventoC = new EventoController();
-    	
-        HashMap<String, Object> objeto = new HashMap<String, Object>();
-        objeto.put("idDono", idDono);
-        objeto.put("nome", nome);
-        objeto.put("descricao", descricao);
-        objeto.put("endereco", endereco);
-        objeto.put("dataInicio", dataInicio);
-        objeto.put("dataFim", dataFim);
-    	
-    	eventoC.update(idEvento, objeto);
+    public void eventoUpdate(Long idEvento,Long idDono, String nome, String descricao, String endereco, Calendar dataInicio, Calendar dataFim) throws PrecoException, DataDeValidadeException, NomeException, EmailException, IdadeException, LoginException, SenhaException{
+    	CommandEventoUpdate commandEU = new CommandEventoUpdate(idEvento, idDono, nome, descricao, endereco, dataInicio, dataFim);
+    	commandEU.execute();
     }
         
     public void eventoDelete(Long id){
