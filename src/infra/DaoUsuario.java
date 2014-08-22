@@ -52,7 +52,7 @@ public class DaoUsuario extends DaoFile<UsuarioAB> {
 
 		fileOut = new FileOutputStream("c:\\user.dat", false); 
 		writer = new ObjectOutputStream(fileOut);
-		writer.writeObject(DB);
+		writer.writeObject(this.DB);
 		fileOut.close();
 		
 		return newObj;

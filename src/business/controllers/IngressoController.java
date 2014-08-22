@@ -26,7 +26,7 @@ public class IngressoController implements IngressoControllerIF {
 		try {
 			i = (IngressoAB) DaoAbstractFactory.getInstance(
 					IngressoAB.class).create(objeto);
-		} catch (IOException e) {
+		} catch (IOException | ClassNotFoundException e) {
 			throw new StructureException(
 					"Erro de estrutura de arquivos ao criar ingresso");// TODO Auto-generated catch block
 		}

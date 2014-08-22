@@ -29,7 +29,7 @@ import business.model.UsuarioAB;
 public class UsuarioController implements UsuarioControllerIF{
 
 	@Override
-	public Long create(HashMap<String, Object> objeto) throws EmailException, IdadeException, LoginException, NomeException, SenhaException{
+	public Long create(HashMap<String, Object> objeto) throws EmailException, IdadeException, LoginException, NomeException, SenhaException, StructureException{
 		validaNome((String) objeto.get("nome"));
         validaEmail((String) objeto.get("email"));
         validaIdade((int) objeto.get("idade"));
@@ -37,9 +37,9 @@ public class UsuarioController implements UsuarioControllerIF{
         UsuarioAB newUser = null;
 		try {
 			newUser = (UsuarioAB) DaoAbstractFactory.getInstance(UsuarioAB.class).create(objeto);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (IOException | ClassNotFoundException e) {
+			throw new StructureException(
+					"Erro de estrutura de arquivos ao criar usuario");// TODO Auto-generated catch block
 		}
         
 		return newUser.getId();

@@ -18,7 +18,7 @@ import java.util.List;
 
 public interface DaoIF<T> {
 	
-    public abstract T create(HashMap<String, Object> obj) throws IOException;
+    public abstract T create(HashMap<String, Object> obj) throws IOException, ClassNotFoundException;
     
     public abstract void delete(Long id) throws FileNotFoundException, IOException, ClassNotFoundException;
     

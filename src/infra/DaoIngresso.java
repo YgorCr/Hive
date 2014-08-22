@@ -1,16 +1,29 @@
 package infra;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.HashMap;
 
 import business.controllers.CodigoAdapter;
 import business.controllers.CodigoIF;
 import business.model.Ingresso;
 import business.model.IngressoAB;
+import business.model.UsuarioAB;
 	
-public class DaoIngresso extends DaoMemo<IngressoAB>{
+public class DaoIngresso extends DaoFile<IngressoAB>{
 	private HashMap<Long, IngressoAB> DB;
 	private static DaoIngresso dao;
 	private Long genID;
+	
+	private FileOutputStream fileOut;
+    private ObjectOutputStream writer;
+    
+    private FileInputStream fileIn;
+    private ObjectInputStream reader;
 	
 	private DaoIngresso() {
 		this.DB = new HashMap<Long, IngressoAB>();
@@ -24,7 +37,7 @@ public class DaoIngresso extends DaoMemo<IngressoAB>{
 	}
 	
 	@Override
-	public IngressoAB create(HashMap<String, Object> obj) {
+	public IngressoAB create(HashMap<String, Object> obj) throws IOException, ClassNotFoundException {
 		CodigoIF geradorCodigo = new CodigoAdapter();
 		
 		String codigo = null;
@@ -43,12 +56,23 @@ public class DaoIngresso extends DaoMemo<IngressoAB>{
 		this.setCampos(obj, ingresso);
 		this.getDB().put(ingresso.getId(), ingresso);
 		
+		fileOut = new FileOutputStream("c:\\ingresso.dat", false); 
+		writer = new ObjectOutputStream(fileOut);
+		writer.writeObject(DB);
+		fileOut.close();
+		
 		return ingresso;
 	}
 
 	@Override
-	protected HashMap<Long, IngressoAB> getDB() {
-		return this.DB;
+	protected HashMap<Long, IngressoAB> getDB() throws IOException, ClassNotFoundException {
+		fileIn = null;
+
+        fileIn = new FileInputStream("C:\\user.dat");
+        reader = new ObjectInputStream(fileIn);
+        DB = (HashMap<Long, IngressoAB>) reader.readObject();
+		
+		return DB;
 	}
 	
 }
