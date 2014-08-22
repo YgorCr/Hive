@@ -7,6 +7,7 @@ import util.IdadeException;
 import util.LoginException;
 import util.NomeException;
 import util.SenhaException;
+import util.StructureException;
 
 public class CommandUsuarioCreate implements Command{
 	
@@ -19,9 +20,17 @@ public class CommandUsuarioCreate implements Command{
         objeto.put("cpf", cpf);
 	}
 	@Override
-	public void execute() throws EmailException, IdadeException, LoginException, NomeException, SenhaException {
+	public void execute() throws EmailException, IdadeException, LoginException, NomeException, SenhaException, StructureException {
 		UsuarioController userC = new UsuarioController();
 		userC.create(objeto);
 	}
 
+	public Memento save(){
+        return new Memento(this.objeto);
+    }
+     
+    public void undoToLastSave(Object obj){
+        Memento memento = (Memento) obj;
+        this.objeto= memento.getSavedState();
+    }
 }

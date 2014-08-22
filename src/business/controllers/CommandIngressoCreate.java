@@ -10,6 +10,7 @@ import util.LoginException;
 import util.NomeException;
 import util.PrecoException;
 import util.SenhaException;
+import util.StructureException;
 
 public class CommandIngressoCreate implements Command{
 
@@ -25,7 +26,7 @@ public class CommandIngressoCreate implements Command{
 	
 	@Override
 	public void execute() throws EmailException, IdadeException,
-			LoginException, NomeException, SenhaException, PrecoException, DataDeValidadeException {
+			LoginException, NomeException, SenhaException, PrecoException, DataDeValidadeException, StructureException {
 		
     	IngressoController ingressoC = new IngressoController();
     	idCode = ingressoC.create(objeto);

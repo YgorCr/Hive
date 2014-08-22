@@ -8,8 +8,11 @@ import java.util.Map;
 //import javax.faces.bean.ViewScoped;
 //import javax.faces.context.FacesContext;
 
+
+
 import util.DataDeValidadeException;
 import util.PrecoException;
+import util.StructureException;
 import business.controllers.IngressoController;
 import business.controllers.IngressoControllerIF;
 import business.model.EventoAB;
@@ -28,7 +31,7 @@ public class IngressoBean {
 		return this.controller.listAll();
 	}
 	
-	public IngressoAB[] getList(Long max, Long offset){
+	public IngressoAB[] getList(Long max, Long offset) throws StructureException{
 		return this.controller.listAll(offset, max);
 		
 	}
@@ -104,6 +107,9 @@ public class IngressoBean {
 		} catch (PrecoException | DataDeValidadeException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (StructureException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return "list?faces-redirect=true";
 	}
@@ -128,13 +134,13 @@ public class IngressoBean {
 		return "list?faces-redirect=true";
 	}
 	
-	public String delete(){
+	public String delete() throws StructureException{
 		controller.delete(ingresso.getId());
 		
 		return "list?faces-redirect=true";
 	}
 	
-	public void show(String id){
+	public void show(String id) throws NumberFormatException, StructureException{
 		this.ingresso = controller.get(Long.parseLong(id));
 		System.out.println("ID "+controller.get(Long.parseLong(id)).getId());
 	}

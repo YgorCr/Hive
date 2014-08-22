@@ -9,6 +9,7 @@ import util.IdadeException;
 import util.LoginException;
 import util.NomeException;
 import util.SenhaException;
+import util.StructureException;
 
 public class CommandEventoCreate implements Command{
 	
@@ -25,7 +26,7 @@ public class CommandEventoCreate implements Command{
 
 	@Override
 	public void execute() throws EmailException, IdadeException,
-			LoginException, NomeException, SenhaException, DataDeValidadeException {
+			LoginException, NomeException, SenhaException, DataDeValidadeException, StructureException {
     	EventoController eventoC = new EventoController();
     	eventoC.create(objeto);
 		

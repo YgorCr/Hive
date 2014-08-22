@@ -10,8 +10,9 @@ import util.SenhaException;
 /*
  * Padrão: Command
  */
+import util.StructureException;
 
 
 public interface Command {
-	public void execute() throws EmailException, IdadeException, LoginException, NomeException, SenhaException, PrecoException, DataDeValidadeException;
+	public void execute() throws EmailException, IdadeException, LoginException, NomeException, SenhaException, PrecoException, DataDeValidadeException, StructureException;
 }

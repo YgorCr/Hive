@@ -7,6 +7,7 @@
 package gui;
 
 import business.controllers.BusinessFacades;
+import business.controllers.CareTaker;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -22,6 +23,7 @@ import util.LoginException;
 import util.NomeException;
 import util.PrecoException;
 import util.SenhaException;
+import util.StructureException;
 
 /**
  *
@@ -31,8 +33,9 @@ public class Hive {
 
     /**
      * @param args the command line arguments
+     * @throws StructureException 
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws StructureException {
     	
         BusinessFacades b = BusinessFacades.getInstance();
         try {
@@ -45,7 +48,7 @@ public class Hive {
             b.usuarioCreate("YgorDinizD", "YgorD2@hotmail.com", 26, "123.456.789-16");// id = 5 
             b.usuarioCreate("YgorCrE", "YgorE@hotmail.com", 25, "123.456.789-17");// id = 6
             b.usuarioCreate("YgorDinizF", "Ygor2F@hotmail.com", 26, "123.456.789-18");// id = 7
-            
+   
             //Evento
             Calendar init = Calendar.getInstance();
             Calendar fim = Calendar.getInstance();

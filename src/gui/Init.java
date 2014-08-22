@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 //import javax.faces.bean.ManagedBean;
 
+
 import business.controllers.IngressoController;
 import business.controllers.IngressoControllerIF;
 import business.controllers.UsuarioController;
@@ -16,6 +17,7 @@ import util.LoginException;
 import util.NomeException;
 import util.PrecoException;
 import util.SenhaException;
+import util.StructureException;
 
 //@ManagedBean
 public class Init {
@@ -23,7 +25,7 @@ public class Init {
 	private static Boolean rodou = false;
 	private static IngressoControllerIF ingrController = new IngressoController();
 
-	public String getTesteInit(){
+	public String getTesteInit() throws StructureException{
 		if(!rodou){
 			initUsuarios();
 			initIngressos();
@@ -33,7 +35,7 @@ public class Init {
 		return null;
 	}
 	
-	private void initUsuarios(){
+	private void initUsuarios() throws StructureException{
 		HashMap<String, Object> user = new HashMap<String, Object>();
 
 		try {
@@ -87,6 +89,9 @@ public class Init {
 		} catch (DataDeValidadeException e) {
 			// TODO Auto-generated catch block
 			System.out.println("NAOAAAAAAA");
+			e.printStackTrace();
+		} catch (StructureException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

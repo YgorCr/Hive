@@ -16,6 +16,7 @@ import util.LoginException;
 import util.NomeException;
 import util.PrecoException;
 import util.SenhaException;
+import util.StructureException;
 
 /**
  *
@@ -38,27 +39,28 @@ public class BusinessFacades {
     /*
      * Métodos de usuario - CRUD
      */
-    public void usuarioCreate(String nome, String email, int idade, String cpf) throws EmailException, IdadeException, LoginException, NomeException, SenhaException{
+    public CommandUsuarioCreate usuarioCreate(String nome, String email, int idade, String cpf) throws EmailException, IdadeException, LoginException, NomeException, SenhaException, StructureException{
        CommandUsuarioCreate commandUC = new CommandUsuarioCreate(nome, email, idade, cpf);
        commandUC.execute();
+       return commandUC;
     }
     
-    public HashMap<String, Object> usuarioGet(Long id){
+    public HashMap<String, Object> usuarioGet(Long id) throws StructureException{
         UsuarioController userC = new UsuarioController();
         return userC.toHashMap(userC.get(id));
     }
     
-    public List<HashMap<String, Object>> usuarioListAll(){
+    public List<HashMap<String, Object>> usuarioListAll() throws StructureException{
     	UsuarioController userC = new UsuarioController();
     	return userC.listToHashMap(userC.listAll());
     }
     
-    public void usuarioUpdate(Long id, String nome, String email, int idade, String cpf) throws EmailException, IdadeException, LoginException, NomeException, SenhaException, PrecoException, DataDeValidadeException{
+    public void usuarioUpdate(Long id, String nome, String email, int idade, String cpf) throws EmailException, IdadeException, LoginException, NomeException, SenhaException, PrecoException, DataDeValidadeException, StructureException{
     	CommandUsuarioUpdate commandUP = new CommandUsuarioUpdate(id, nome, email, idade, cpf);
     	commandUP.execute();
     }
     
-    public void usuarioDelete(Long id){
+    public void usuarioDelete(Long id) throws StructureException{
     	UsuarioController userC = new UsuarioController();
     	userC.delete(id);
     }
@@ -73,13 +75,13 @@ public class BusinessFacades {
     	return ingressoC.geraQRCode(codigo);
     }
         
-    public String ingressoCreate(Long idEvento, Long idUsuario, Double valor, Calendar dataDeValidade, Boolean utilizado) throws PrecoException, DataDeValidadeException, EmailException, IdadeException, LoginException, NomeException, SenhaException{
+    public String ingressoCreate(Long idEvento, Long idUsuario, Double valor, Calendar dataDeValidade, Boolean utilizado) throws PrecoException, DataDeValidadeException, EmailException, IdadeException, LoginException, NomeException, SenhaException, StructureException{
     	CommandIngressoCreate commandIC = new CommandIngressoCreate(idEvento, idUsuario, valor, dataDeValidade, utilizado);
     	commandIC.execute();
     	return Long.toString(commandIC.getIdCode());
     }
     
-    public HashMap<String, Object> ingressoGet(Long id){
+    public HashMap<String, Object> ingressoGet(Long id) throws StructureException{
     	IngressoController ingressoC = new IngressoController();
     	return ingressoC.toHashMap(ingressoC.get(id));
     }
@@ -94,7 +96,7 @@ public class BusinessFacades {
     	commandIU.execute();
     }
 
-    public void IngressoDelete(Long id){
+    public void IngressoDelete(Long id) throws StructureException{
     	IngressoController ingressoC = new IngressoController();
     	ingressoC.delete(id);
     }
@@ -103,29 +105,40 @@ public class BusinessFacades {
      * Métodos de Evento - CRUD
      */
     
-    public void eventoCreate(Long idDono, String nome, String descricao, String endereco, Calendar dataInicio, Calendar dataFim) throws PrecoException, DataDeValidadeException, NomeException, EmailException, IdadeException, LoginException, SenhaException{
+    public void eventoCreate(Long idDono, String nome, String descricao, String endereco, Calendar dataInicio, Calendar dataFim) throws PrecoException, DataDeValidadeException, NomeException, EmailException, IdadeException, LoginException, SenhaException, StructureException{
     	CommandEventoCreate commandEC = new CommandEventoCreate(idDono, nome, descricao, endereco, dataInicio, dataFim);
     	commandEC.execute();
     }
     
-    public HashMap<String, Object> eventoGet(Long id){
+    public HashMap<String, Object> eventoGet(Long id) throws StructureException{
     	EventoController eventoC = new EventoController();
     	return eventoC.toHashMap(eventoC.get(id));
     }
     
-    public List<HashMap<String, Object>> eventoListAll(){
+    public List<HashMap<String, Object>> eventoListAll() throws StructureException{
     	EventoController eventoC = new EventoController();
     	return eventoC.listToHashMap(eventoC.listAll());
     }
     
-    public void eventoUpdate(Long idEvento,Long idDono, String nome, String descricao, String endereco, Calendar dataInicio, Calendar dataFim) throws PrecoException, DataDeValidadeException, NomeException, EmailException, IdadeException, LoginException, SenhaException{
+    public void eventoUpdate(Long idEvento,Long idDono, String nome, String descricao, String endereco, Calendar dataInicio, Calendar dataFim) throws PrecoException, DataDeValidadeException, NomeException, EmailException, IdadeException, LoginException, SenhaException, StructureException{
     	CommandEventoUpdate commandEU = new CommandEventoUpdate(idEvento, idDono, nome, descricao, endereco, dataInicio, dataFim);
     	commandEU.execute();
     }
         
-    public void eventoDelete(Long id){
+    public void eventoDelete(Long id) throws StructureException{
     	EventoController eventoC = new EventoController();
     	eventoC.delete(id);
+    }
+    
+
+	public void saveUser(CommandUsuarioCreate commandUC){
+        CareTaker care = new CareTaker();
+        care.save(commandUC);
+    }
+     
+    public void undoUser(CommandUsuarioCreate commandUC){
+    	CareTaker care = new CareTaker();
+        care.undo(commandUC);
     }
 }
 
