@@ -1,3 +1,6 @@
+/*
+ * CommandUsuario, comando que usará o memento
+ */
 package business.controllers;
 
 import java.util.HashMap;

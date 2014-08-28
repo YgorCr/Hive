@@ -138,7 +138,7 @@ public class BusinessFacades {
     }
 
     
-    //Memento
+    //Memento funcionando
     public void set(HashMap<String, Object> state) {
         System.out.println("Setando o estado " + state);
         this.state = state;

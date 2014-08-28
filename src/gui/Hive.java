@@ -82,6 +82,7 @@ public class Hive {
         b.usuarioCreate("YgorCrE", "YgorE@hotmail.com", 25, "123.456.789-17");// id = 6
         b.usuarioCreate("YgorDinizF", "Ygor2F@hotmail.com", 26, "123.456.789-18");// id = 7
    
+        //Memento
         b.set(b.usuarioUpdate(1L, "Mudoooou", "Mudou@hotmail.com", 100, "123.456.789-16"));
         b.saveUserMemento();
         b.set(b.usuarioUpdate(1L, "Mudoudenovo", "Mudou22@hotmail.com", 2, "222.222.789-16"));
@@ -100,8 +101,7 @@ public class Hive {
         b.eventoCreate(3L, "Congresso", "QualisA", "Rua dos de baixo", init, fim); //id = 3
         b.eventoCreate(4L, "workshop", "Interessante", "Universidade", init, fim); //id = 4
         //b.eventoUpdate(0L, 1L, "Showzaoo", "nada a declarar", "rua dos bobos", init, fim);
-        
-
+     
         
         //Ingresso
         Calendar data = Calendar.getInstance();
@@ -116,10 +116,7 @@ public class Hive {
         codigo = b.ingressoCreate(0L, 0L, 25.0, data, false);
         codigo = b.ingressoCreate(1L, 1L, 50.0, data, false);
         codigo = b.ingressoCreate(2L, 3L, 100.0, data, false);
-            
-        
-        
-    
+           
     }
 }
 
